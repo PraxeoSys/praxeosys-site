@@ -19,7 +19,7 @@ export async function ResearchSection() {
   };
 
   return (
-    <section id="research" className="mx-auto max-w-5xl px-6 py-20">
+    <div id="research">
       <h2 className="font-serif text-2xl text-foreground sm:text-3xl">
         {t("heading")}
       </h2>
@@ -42,6 +42,6 @@ export async function ResearchSection() {
       >
         {t("viewAll")}
       </Link>
-    </section>
+    </div>
   );
 }

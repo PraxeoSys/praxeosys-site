@@ -17,9 +17,20 @@
   "locale": {
     "switchTo": "中文"
   },
+  "chapterRail": {
+    "ariaLabel": "Chapter navigation",
+    "progressAriaLabel": "Reading progress",
+    "acts": {
+      "whoami": "whoami",
+      "how-i-work": "how I work",
+      "proof": "proof",
+      "work": "work",
+      "thinking": "thinking"
+    }
+  },
   "hero": {
     "kicker": "Johnny — building PraxeoSys",
-    "narrative": "I read markets through economics, test beliefs with code, and settle them with trades.",
+    "narrative": "I read markets through <thesis>economics</thesis>, test beliefs with <code>code</code>, and settle them with <trade>trades</trade>.",
     "ctaProof": "View Proof",
     "ctaResearch": "Read Research",
     "statusNow": "now",
@@ -74,7 +85,29 @@
     "viewArchive": "View all projects →",
     "archiveTitle": "All projects",
     "archiveSubheading": "The full archive, including work not featured on the homepage.",
-    "backHome": "← Back home"
+    "backHome": "← Back home",
+    "drawer": {
+      "expand": "Expand project details",
+      "collapse": "Collapse project details",
+      "tabsAriaLabel": "Project detail tabs",
+      "regionLabel": "{title} project archive",
+      "tabs": {
+        "direction": "01 Direction",
+        "progress": "02 Progress",
+        "skills": "03 Skills"
+      },
+      "vision": "Vision",
+      "roadmap": "Roadmap",
+      "milestones": "Milestones",
+      "milestoneStatus": {
+        "done": "Done",
+        "in-progress": "In progress",
+        "planned": "Planned"
+      },
+      "currentStatus": "Current status",
+      "metrics": "Metrics",
+      "skillsHeading": "Skills & tools"
+    }
   },
   "research": {
     "heading": "Research",

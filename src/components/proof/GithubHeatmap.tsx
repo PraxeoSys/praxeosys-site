@@ -4,6 +4,7 @@ import { siteConfig } from "@data/site-config";
 import { Panel } from "@/components/ui/Panel";
 import { Metric } from "@/components/ui/Metric";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
+import { BootFrame } from "@/components/ui/BootFrame";
 
 function buildWeeks(days: ContributionDay[]): (ContributionDay | null)[][] {
   if (days.length === 0) return [];
@@ -44,54 +45,56 @@ export async function GithubHeatmap() {
   const weeks = data ? buildWeeks(data.days) : [];
 
   return (
-    <Panel title={t("title")}>
-      {!data ? (
-        <p className="font-mono text-sm text-panel-foreground/60">
-          {t("error")}
-        </p>
-      ) : (
-        <>
-          <div className="overflow-x-auto pb-2">
-            <div
-              className="grid w-max grid-flow-col gap-[3px]"
-              style={{ gridTemplateRows: "repeat(7, 10px)" }}
-            >
-              {weeks.flatMap((week, wi) =>
-                week.map((day, di) => (
-                  <div
-                    key={`${wi}-${di}`}
-                    className={`h-[10px] w-[10px] rounded-[2px] ${
-                      day ? levelClass(day.level) : "bg-transparent"
-                    }`}
-                    title={day ? `${day.date}: ${day.count}` : undefined}
-                  />
-                )),
-              )}
+    <BootFrame>
+      <Panel title={t("title")}>
+        {!data ? (
+          <p className="font-mono text-sm text-panel-foreground/60">
+            {t("error")}
+          </p>
+        ) : (
+          <>
+            <div className="overflow-x-auto pb-2">
+              <div
+                className="grid w-max grid-flow-col gap-[3px]"
+                style={{ gridTemplateRows: "repeat(7, 10px)" }}
+              >
+                {weeks.flatMap((week, wi) =>
+                  week.map((day, di) => (
+                    <div
+                      key={`${wi}-${di}`}
+                      className={`h-[10px] w-[10px] rounded-[2px] ${
+                        day ? levelClass(day.level) : "bg-transparent"
+                      }`}
+                      title={day ? `${day.date}: ${day.count}` : undefined}
+                    />
+                  )),
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className="mt-4 flex flex-wrap gap-8">
-            <Metric
-              label={t("totalCommits")}
-              value={<AnimatedNumber value={data.totalContributions} />}
-              accent
-            />
-            <Metric
-              label={t("activeWeeks")}
-              value={<AnimatedNumber value={data.activeWeeks} />}
-            />
-          </div>
+            <div className="mt-4 flex flex-wrap gap-8">
+              <Metric
+                label={t("totalCommits")}
+                value={<AnimatedNumber value={data.totalContributions} />}
+                accent
+              />
+              <Metric
+                label={t("activeWeeks")}
+                value={<AnimatedNumber value={data.activeWeeks} />}
+              />
+            </div>
 
-          <a
-            href={`https://github.com/${siteConfig.github}`}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-block font-mono text-xs text-accent hover:underline"
-          >
-            {t("viewProfile")}
-          </a>
-        </>
-      )}
-    </Panel>
+            <a
+              href={`https://github.com/${siteConfig.github}`}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-block font-mono text-xs text-accent hover:underline"
+            >
+              {t("viewProfile")}
+            </a>
+          </>
+        )}
+      </Panel>
+    </BootFrame>
   );
 }

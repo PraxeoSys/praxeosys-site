@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
+import { useInView } from "@/lib/useInView";
+import { transitions } from "@/lib/motion";
 
 interface LoopDiagramNode {
   id: string;
@@ -19,30 +22,51 @@ interface LoopDiagramProps {
 export function LoopDiagram({ nodes, ctaLabel }: LoopDiagramProps) {
   const [openId, setOpenId] = useState<string | null>(nodes[0]?.id ?? null);
   const openNode = nodes.find((n) => n.id === openId) ?? null;
+  const { ref: gridRef, inView } = useInView<HTMLDivElement>({ threshold: 0.3 });
 
   return (
     <div className="mt-10">
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-[repeat(7,1fr)] sm:gap-0">
+      <div
+        ref={gridRef}
+        className="grid grid-cols-1 gap-3 sm:grid-cols-[repeat(7,1fr)] sm:gap-0"
+      >
         {nodes.map((node, i) => (
           <div key={node.id} className="contents">
-            <button
-              type="button"
-              onClick={() => setOpenId(openId === node.id ? null : node.id)}
-              aria-expanded={openId === node.id}
-              className={cn(
-                "rounded-panel border px-4 py-4 text-left transition-colors sm:col-span-1",
-                openId === node.id
-                  ? "border-accent bg-accent/10"
-                  : "border-border hover:border-accent/50",
-              )}
-            >
-              <span className="font-mono text-[11px] text-foreground-muted">
-                0{i + 1}
-              </span>
-              <span className="mt-1 block font-serif text-lg text-foreground">
-                {node.title}
-              </span>
-            </button>
+            <div className="relative sm:col-span-1">
+              {/*
+                Act1->Act2 transition (fallback design, see plan): each of the
+                4 nodes lights up in sequence once this diagram scrolls into
+                view, echoing the Hero keyword highlight. Purely additive —
+                opacity-only overlay behind the button, the existing openId
+                accordion state/behavior above is completely untouched.
+              */}
+              <motion.span
+                aria-hidden
+                data-motion-decorative
+                className="pointer-events-none absolute inset-0 rounded-panel bg-accent/10 ring-1 ring-accent/40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: inView ? 1 : 0 }}
+                transition={{ ...transitions.reveal, delay: i * 0.08 }}
+              />
+              <button
+                type="button"
+                onClick={() => setOpenId(openId === node.id ? null : node.id)}
+                aria-expanded={openId === node.id}
+                className={cn(
+                  "relative w-full rounded-panel border px-4 py-4 text-left transition-colors",
+                  openId === node.id
+                    ? "border-accent bg-accent/10"
+                    : "border-border hover:border-accent/50",
+                )}
+              >
+                <span className="font-mono text-[11px] text-foreground-muted">
+                  0{i + 1}
+                </span>
+                <span className="mt-1 block font-serif text-lg text-foreground">
+                  {node.title}
+                </span>
+              </button>
+            </div>
 
             {i < nodes.length - 1 && (
               <span

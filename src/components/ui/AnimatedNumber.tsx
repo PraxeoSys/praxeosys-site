@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "@/lib/useInView";
 
 interface AnimatedNumberProps {
   value: number;
@@ -20,48 +21,25 @@ export function AnimatedNumber({
   durationMs = 900,
   className,
 }: AnimatedNumberProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  // If the user prefers reduced motion, start at the final value so the
-  // effect below can skip the animation entirely instead of setting state.
-  const [display, setDisplay] = useState(() =>
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      ? value
-      : 0,
-  );
-  const started = useRef(false);
+  const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.4 });
+  // If the user prefers reduced motion, useInView already starts `inView`
+  // true — start the display at the final value so we skip the rAF loop.
+  const [display, setDisplay] = useState(() => (inView ? value : 0));
+  const started = useRef(inView);
 
   useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
+    if (!inView || started.current) return;
+    started.current = true;
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || started.current) return;
-        started.current = true;
-
-        const start = performance.now();
-        const tick = (now: number) => {
-          const progress = Math.min((now - start) / durationMs, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          setDisplay(value * eased);
-          if (progress < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-        observer.disconnect();
-      },
-      { threshold: 0.4 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [value, durationMs]);
+    const start = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / durationMs, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(value * eased);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [inView, value, durationMs]);
 
   return (
     <span ref={ref} className={className}>
