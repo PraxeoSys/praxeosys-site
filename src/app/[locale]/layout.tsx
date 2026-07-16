@@ -9,6 +9,7 @@ import type { Locale } from "@/lib/types";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HtmlLangSync } from "@/components/layout/HtmlLangSync";
+import { MotionRoot } from "@/components/layout/MotionRoot";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -54,10 +55,12 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider>
-      <HtmlLangSync />
-      <Header />
-      {children}
-      <Footer />
+      <MotionRoot>
+        <HtmlLangSync />
+        <Header />
+        {children}
+        <Footer />
+      </MotionRoot>
     </NextIntlClientProvider>
   );
 }

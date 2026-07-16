@@ -22,6 +22,12 @@
   --accent-ink: #8a5a00;
 
   --radius: 0.5rem;
+
+  /* motion tokens — keep in sync with src/lib/motion.ts (no build-time link) */
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 300ms;
+  --motion-duration-entrance: 600ms;
+  --motion-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root[data-theme="light"],
@@ -78,6 +84,12 @@ html {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* Escape hatch for decorative CSS-only scroll-driven effects (e.g. the
+     reading-progress bar) that motion.ts/MotionConfig can't reach directly. */
+  [data-motion-decorative] {
+    animation: none !important;
   }
 }
 
