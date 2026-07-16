@@ -10,7 +10,7 @@ export async function NowSection() {
   const data = nowData[locale];
 
   return (
-    <section id="now" className="mx-auto max-w-5xl px-6 py-20">
+    <div id="now">
       <h2 className="font-serif text-2xl text-foreground sm:text-3xl">
         {t("heading")}
       </h2>
@@ -45,6 +45,6 @@ export async function NowSection() {
           </p>
         </Panel>
       </div>
-    </section>
+    </div>
   );
 }

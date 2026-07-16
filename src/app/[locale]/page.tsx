@@ -3,9 +3,8 @@ import { Hero } from "@/components/hero/Hero";
 import { LoopSection } from "@/components/loop/LoopSection";
 import { ProofSection } from "@/components/proof/ProofSection";
 import { ProjectsSection } from "@/components/projects/ProjectsSection";
-import { ResearchSection } from "@/components/research/ResearchSection";
-import { NowSection } from "@/components/now/NowSection";
 import { ContactSection } from "@/components/contact/ContactSection";
+import { ThinkingSection } from "@/components/narrative/ThinkingSection";
 import { ChapterRail } from "@/components/narrative/ChapterRail";
 import { ReadingProgress } from "@/components/narrative/ReadingProgress";
 import { narrativeActs } from "@data/narrative-acts";
@@ -34,8 +33,7 @@ export default async function HomePage({
         <LoopSection />
         <ProofSection />
         <ProjectsSection />
-        <ResearchSection />
-        <NowSection />
+        <ThinkingSection />
         <ContactSection />
       </main>
     </>
