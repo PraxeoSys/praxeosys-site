@@ -463,4 +463,108 @@ export const projects: Project[] = [
       "隐私优先架构设计",
     ],
   },
+  {
+    slug: "automd-obsidian",
+    status: "shipped",
+    featured: true,
+    title: {
+      en: "Markdown Knowledge Base",
+      zh: "Markdown 知识库",
+    },
+    oneLiner: {
+      en: "A GitHub-native, all-Markdown personal knowledge base where Claude Code is the archivist.",
+      zh: "以 GitHub 为中心、纯 Markdown 的个人知识库，用 Claude Code 当图书管理员自动归档。",
+    },
+    problem: {
+      en: "Personal knowledge (AI chat exports, articles, books, video transcripts) scatters across tools with no durable, searchable, vendor-independent home — and manual organizing rarely survives contact with real volume.",
+      zh: "个人知识（AI 对话记录、文章、书籍、视频转写）散落在各种工具里，没有一个持久、可检索、不被厂商锁定的归宿——手动整理这些内容，量一大基本都半途而废。",
+    },
+    method: {
+      en: "A zero-custom-tooling pipeline: off-the-shelf converters normalize any source into Markdown and drop it in inbox/, then Claude Code acts as the archivist — deduping by source ID, routing into a typed directory structure, backfilling frontmatter, building wikilinks, and updating Dataview-driven indexes — all governed by a written rulebook rather than ad-hoc judgment calls.",
+      zh: "一套零自研工具的流水线：现成的转换器把任意来源统一转成 Markdown 扔进 inbox/，再由 Claude Code 当图书管理员——按来源 ID 查重、按类型路由进结构化目录、补全 frontmatter、建立双向链接、更新 Dataview 动态索引，整套流程由一份成文规则约束，而不是临场判断。",
+    },
+    result: {
+      en: "Supports 4 source types (AI session exports, web articles, books/long docs, video transcripts) end-to-end; extending to a new source takes exactly 2 steps (one converter script, one routing-table row) with zero changes to the core structure. Sensitive-data scanning runs twice — once in the archiving pass, once via a GitHub Actions gitleaks check on push — before anything reaches the remote.",
+      zh: "端到端支持 4 种来源类型（AI 对话导出、网页文章、书籍/长文档、视频转写）；接入新来源只需 2 步（加一个转换脚本、加一行路由规则），核心结构零改动。敏感信息扫描跑两道——归档时一次，push 时 GitHub Actions 的 gitleaks 再扫一次——才允许内容进远端仓库。",
+    },
+    tech: ["Markdown", "Obsidian", "Claude Code", "GitHub Actions", "Dataview", "gitleaks"],
+    links: {
+      demo: undefined,
+      github: undefined,
+    },
+    direction: {
+      vision: {
+        en: "A knowledge base that outlives any single tool — plain Markdown means no vendor lock-in, Git means full history and multi-device sync, and a librarian with a written rulebook means organization survives volume instead of decaying into an unsorted pile.",
+        zh: "一个不依赖任何单一工具就能长期存活的知识库——纯 Markdown 意味着不被厂商锁定，Git 意味着完整历史和多设备同步，一个照章办事的图书管理员意味着内容量上来之后组织结构不会烂尾变成一堆废纸。",
+      },
+      roadmap: {
+        en: "Next: wire up more source converters (starting with tool session exports beyond Claude Code, e.g. Cursor — the routing path is already reserved), and let the permanent notes layer grow as raw archived material gets revisited and synthesized.",
+        zh: "接下来：接入更多来源转换器（先从 Claude Code 之外的工具会话导出开始，比如 Cursor——归档路径已经预留好了），并让提炼后的永久笔记层随着原始归档内容被反复回顾、综合而持续生长。",
+      },
+      milestones: [
+        {
+          label: {
+            en: "Core archiving pipeline (dedupe, route, frontmatter, link, index)",
+            zh: "核心归档流水线（查重 / 路由 / 元数据 / 建链 / 索引）",
+          },
+          status: "done",
+        },
+        {
+          label: {
+            en: "4 source-type converters (sessions/articles/books/videos)",
+            zh: "4 种来源类型转换器（对话 / 文章 / 书籍 / 视频）",
+          },
+          status: "done",
+        },
+        {
+          label: {
+            en: "Two-layer secret scanning (archive-time + CI gitleaks)",
+            zh: "两道密钥扫描（归档时 + CI gitleaks）",
+          },
+          status: "done",
+        },
+        {
+          label: {
+            en: "Distilled notes layer growing from archived material",
+            zh: "从归档材料中持续生长的提炼笔记层",
+          },
+          status: "in-progress",
+        },
+        {
+          label: {
+            en: "Additional tool-session converters (e.g. Cursor)",
+            zh: "接入更多工具会话转换器（如 Cursor）",
+          },
+          status: "planned",
+        },
+      ],
+    },
+    progress: {
+      status: {
+        en: "Core pipeline and rulebook are in daily use; the main open work is qualitative — letting the permanent notes layer actually accumulate distilled insight rather than staying a raw archive.",
+        zh: "核心流水线和规则已经在日常使用中；剩下的主要是质变工作——让永久笔记层真正积累提炼后的洞见，而不是停留在原始归档状态。",
+      },
+      metrics: [
+        {
+          label: { en: "Source types supported", zh: "支持来源类型" },
+          value: "4",
+        },
+        {
+          label: { en: "Steps to add a new source", zh: "接入新来源所需步骤" },
+          value: "2",
+        },
+        {
+          label: { en: "Secret-scan passes before remote", zh: "到达远端前的密钥扫描道数" },
+          value: "2",
+        },
+      ],
+    },
+    skills: [
+      "Markdown 工具链设计",
+      "Claude Code 自动化",
+      "信息架构 / Information Architecture",
+      "GitHub Actions",
+      "隐私优先流程设计",
+    ],
+  },
 ];
