@@ -7,7 +7,10 @@ export function Hero() {
   const t = useTranslations("hero");
 
   return (
-    <section className="mx-auto flex max-w-5xl flex-col gap-8 px-6 pb-16 pt-20 sm:pt-28">
+    <section
+      id="whoami"
+      className="mx-auto flex max-w-5xl flex-col gap-8 px-6 pb-16 pt-20 sm:pt-28"
+    >
       <p className="font-mono text-xs uppercase tracking-widest text-accent">
         {t("kicker")}
       </p>

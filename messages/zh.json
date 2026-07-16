@@ -17,6 +17,17 @@
   "locale": {
     "switchTo": "EN"
   },
+  "chapterRail": {
+    "ariaLabel": "章节导航",
+    "progressAriaLabel": "阅读进度",
+    "acts": {
+      "whoami": "whoami",
+      "how-i-work": "工作方式",
+      "proof": "实证",
+      "work": "作品",
+      "thinking": "思考"
+    }
+  },
   "hero": {
     "kicker": "Johnny — 在构建 PraxeoSys",
     "narrative": "用经济学理解市场，用代码验证认知，用交易兑现判断。",

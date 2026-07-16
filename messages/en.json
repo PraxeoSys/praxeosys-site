@@ -17,6 +17,17 @@
   "locale": {
     "switchTo": "中文"
   },
+  "chapterRail": {
+    "ariaLabel": "Chapter navigation",
+    "progressAriaLabel": "Reading progress",
+    "acts": {
+      "whoami": "whoami",
+      "how-i-work": "how I work",
+      "proof": "proof",
+      "work": "work",
+      "thinking": "thinking"
+    }
+  },
   "hero": {
     "kicker": "Johnny — building PraxeoSys",
     "narrative": "I read markets through economics, test beliefs with code, and settle them with trades.",
