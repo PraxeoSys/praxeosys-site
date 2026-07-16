@@ -30,7 +30,7 @@
   },
   "hero": {
     "kicker": "Johnny — building PraxeoSys",
-    "narrative": "I read markets through economics, test beliefs with code, and settle them with trades.",
+    "narrative": "I read markets through <thesis>economics</thesis>, test beliefs with <code>code</code>, and settle them with <trade>trades</trade>.",
     "ctaProof": "View Proof",
     "ctaResearch": "Read Research",
     "statusNow": "now",

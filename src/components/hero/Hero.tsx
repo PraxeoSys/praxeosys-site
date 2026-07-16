@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Suspense } from "react";
 import { Link } from "@/i18n/navigation";
 import { StatusBar } from "./StatusBar";
+import { KeywordEcho } from "./KeywordEcho";
 
 export function Hero() {
   const t = useTranslations("hero");
@@ -16,7 +17,11 @@ export function Hero() {
       </p>
 
       <h1 className="max-w-3xl font-serif text-3xl leading-tight text-foreground sm:text-4xl md:text-5xl">
-        {t("narrative")}
+        {t.rich("narrative", {
+          thesis: (chunks) => <KeywordEcho id="thesis">{chunks}</KeywordEcho>,
+          code: (chunks) => <KeywordEcho id="code">{chunks}</KeywordEcho>,
+          trade: (chunks) => <KeywordEcho id="trade">{chunks}</KeywordEcho>,
+        })}
       </h1>
 
       <div className="flex flex-wrap gap-4 pt-2">

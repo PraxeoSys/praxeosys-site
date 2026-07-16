@@ -30,7 +30,7 @@
   },
   "hero": {
     "kicker": "Johnny — 在构建 PraxeoSys",
-    "narrative": "用经济学理解市场，用代码验证认知，用交易兑现判断。",
+    "narrative": "用<thesis>经济学</thesis>理解市场，用<code>代码</code>验证认知，用<trade>交易</trade>兑现判断。",
     "ctaProof": "查看证据",
     "ctaResearch": "阅读研究",
     "statusNow": "现在",
