@@ -37,7 +37,7 @@ npm run lint     # eslint
 | Hero narrative sentence, nav labels, all UI copy | `messages/en.json` and `messages/zh.json` (keep both files' keys in sync) |
 | "Now" section (focus / researching / watching) | `data/now.json` — also bump `updatedAt` |
 | The Loop's four node descriptions + links | `data/loop-nodes.ts` |
-| Projects (cards on homepage + `/projects` archive) | `data/projects.ts` — set `featured: true` for the first 3–5 you want on the homepage; `status: "todo"` shows a TODO badge |
+| Projects (cards + expandable archive drawer on homepage + `/projects` archive) | `data/projects.ts` — set `featured: true` for the first 3–5 you want on the homepage; `status: "todo"` shows a TODO badge. Each project also needs `direction` (vision/roadmap/milestones), `progress` (status/metrics), and `skills` (string tags) — these fill the drawer's 01/02/03 panels. |
 | Strategy performance panel | `data/performance.json` — flip `enabled` to `true` once you have a real, defensible track record; replace the `series`/`metrics` with real data |
 | Research articles (the digital garden) | `content/en/research/*.mdx` and `content/zh/research/*.mdx` |
 

@@ -11,6 +11,31 @@ import type { Localized } from "@/lib/types";
  * - status: "todo" 的卡片会在标题旁显示 TODO 徽章，提醒你替换为真实项目。
  */
 
+export interface ProjectMilestone {
+  label: Localized;
+  status: "done" | "in-progress" | "planned";
+  /** Optional YYYY-MM or YYYY-MM-DD. */
+  date?: string;
+}
+
+export interface ProjectDirection {
+  /** What problem this solves and where it's headed. */
+  vision: Localized;
+  roadmap: Localized;
+  milestones: ProjectMilestone[];
+}
+
+export interface ProjectMetric {
+  label: Localized;
+  /** Pre-formatted display string (e.g. "1.2s", "230 users"). */
+  value: string;
+}
+
+export interface ProjectProgress {
+  status: Localized;
+  metrics: ProjectMetric[];
+}
+
 export interface Project {
   slug: string;
   status: "shipped" | "todo";
@@ -25,6 +50,12 @@ export interface Project {
     demo?: string;
     github?: string;
   };
+  /** Feeds the archive drawer's "01 Direction" panel. */
+  direction: ProjectDirection;
+  /** Feeds the archive drawer's "02 Progress" panel. */
+  progress: ProjectProgress;
+  /** Feeds the archive drawer's "03 Skills" panel (tag pills). */
+  skills: string[];
 }
 
 export const projects: Project[] = [
@@ -57,6 +88,32 @@ export const projects: Project[] = [
       demo: undefined,
       github: undefined,
     },
+    direction: {
+      vision: {
+        en: "TODO: problem this project solves and where it's headed",
+        zh: "TODO：这个项目要解决的问题及未来方向",
+      },
+      roadmap: {
+        en: "TODO: next 2-3 planned steps",
+        zh: "TODO：接下来 2-3 步计划",
+      },
+      milestones: [
+        {
+          label: { en: "TODO: milestone 1", zh: "TODO：里程碑一" },
+          status: "planned",
+        },
+      ],
+    },
+    progress: {
+      status: {
+        en: "TODO: current status in one paragraph",
+        zh: "TODO：当前状态一段话",
+      },
+      metrics: [
+        { label: { en: "TODO: metric name", zh: "TODO：指标名称" }, value: "TODO" },
+      ],
+    },
+    skills: ["TODO"],
   },
   {
     slug: "todo-project-2",
@@ -87,5 +144,31 @@ export const projects: Project[] = [
       demo: undefined,
       github: undefined,
     },
+    direction: {
+      vision: {
+        en: "TODO: problem this project solves and where it's headed",
+        zh: "TODO：这个项目要解决的问题及未来方向",
+      },
+      roadmap: {
+        en: "TODO: next 2-3 planned steps",
+        zh: "TODO：接下来 2-3 步计划",
+      },
+      milestones: [
+        {
+          label: { en: "TODO: milestone 1", zh: "TODO：里程碑一" },
+          status: "planned",
+        },
+      ],
+    },
+    progress: {
+      status: {
+        en: "TODO: current status in one paragraph",
+        zh: "TODO：当前状态一段话",
+      },
+      metrics: [
+        { label: { en: "TODO: metric name", zh: "TODO：指标名称" }, value: "TODO" },
+      ],
+    },
+    skills: ["TODO"],
   },
 ];
