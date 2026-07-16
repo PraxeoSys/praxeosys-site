@@ -1,4 +1,4 @@
-# ProxeoSys — Johnny's personal site
+# PraxeoSys — Johnny's personal site
 
 "I read markets through economics, test beliefs with code, and settle them with trades."
 
@@ -23,7 +23,7 @@ npm run lint     # eslint
 
 1. Push this repo to GitHub.
 2. Import it in [Vercel](https://vercel.com/new) — no special configuration needed, it's a standard Next.js App Router project.
-3. Set the production domain to `proxeosys.com` (already assumed in `data/site-config.ts` → `url`) in Vercel's Project → Domains settings.
+3. Set the production domain to `praxeosys.com` (already assumed in `data/site-config.ts` → `url`) in Vercel's Project → Domains settings.
 4. Deploy. The GitHub contributions panel and strategy-performance panel (if enabled) use ISR (`revalidate` in `src/lib/github.ts`), so no extra cron/webhook setup is required — they refresh automatically.
 
 ## Content update guide

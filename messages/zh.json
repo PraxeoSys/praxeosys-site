@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Johnny — 在构建 ProxeoSys",
+    "title": "Johnny — 在构建 PraxeoSys",
     "description": "用经济学理解市场，用代码验证认知，用交易兑现判断。独立开发者、Web3 builder、交易员、量化研究者。"
   },
   "nav": {
@@ -18,7 +18,7 @@
     "switchTo": "EN"
   },
   "hero": {
-    "kicker": "Johnny — 在构建 ProxeoSys",
+    "kicker": "Johnny — 在构建 PraxeoSys",
     "narrative": "用经济学理解市场，用代码验证认知，用交易兑现判断。",
     "ctaProof": "查看证据",
     "ctaResearch": "阅读研究",

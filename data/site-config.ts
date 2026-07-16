@@ -11,17 +11,17 @@ export const siteConfig = {
   name: "Johnny",
 
   /** 品牌/域名，站点标题与 logo 使用 */
-  brand: "ProxeoSys",
-  domain: "proxeosys.com",
+  brand: "PraxeoSys",
+  domain: "praxeosys.com",
 
   /** 生产环境完整 URL，用于 metadataBase / OG / sitemap */
-  url: "https://proxeosys.com",
+  url: "https://praxeosys.com",
 
   /** GitHub 用户名，用于贡献热力图 API 与项目链接 */
   github: "PraxeoSys",
 
   social: {
-    /** TODO: 填写 X/Twitter 用户名（不含 @），如 "proxeosys"。留空则隐藏该入口 */
+    /** TODO: 填写 X/Twitter 用户名（不含 @），如 "praxeosys"。留空则隐藏该入口 */
     twitter: "",
 
     /** TODO: 填写 Telegram 用户名（不含 @）。留空则隐藏该入口 */

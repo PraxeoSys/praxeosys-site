@@ -60,7 +60,7 @@ export function OgCard({ kicker, title, subtitle }: OgCardProps) {
       )}
 
       <div style={{ display: "flex", fontSize: 22, color: "#9A9A9A" }}>
-        proxeosys.com
+        praxeosys.com
       </div>
     </div>
   );
