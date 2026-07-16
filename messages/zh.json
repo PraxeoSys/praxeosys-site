@@ -85,7 +85,29 @@
     "viewArchive": "查看全部项目 →",
     "archiveTitle": "全部项目",
     "archiveSubheading": "完整归档，含首页未展示的项目。",
-    "backHome": "← 返回首页"
+    "backHome": "← 返回首页",
+    "drawer": {
+      "expand": "展开项目详情",
+      "collapse": "收起项目详情",
+      "tabsAriaLabel": "项目详情标签页",
+      "regionLabel": "{title} 项目档案",
+      "tabs": {
+        "direction": "01 方向",
+        "progress": "02 进展",
+        "skills": "03 技能"
+      },
+      "vision": "愿景",
+      "roadmap": "路线图",
+      "milestones": "里程碑",
+      "milestoneStatus": {
+        "done": "已完成",
+        "in-progress": "进行中",
+        "planned": "计划中"
+      },
+      "currentStatus": "当前状态",
+      "metrics": "指标",
+      "skillsHeading": "技能与工具"
+    }
   },
   "research": {
     "heading": "Research",

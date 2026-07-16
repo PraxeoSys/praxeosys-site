@@ -85,7 +85,29 @@
     "viewArchive": "View all projects →",
     "archiveTitle": "All projects",
     "archiveSubheading": "The full archive, including work not featured on the homepage.",
-    "backHome": "← Back home"
+    "backHome": "← Back home",
+    "drawer": {
+      "expand": "Expand project details",
+      "collapse": "Collapse project details",
+      "tabsAriaLabel": "Project detail tabs",
+      "regionLabel": "{title} project archive",
+      "tabs": {
+        "direction": "01 Direction",
+        "progress": "02 Progress",
+        "skills": "03 Skills"
+      },
+      "vision": "Vision",
+      "roadmap": "Roadmap",
+      "milestones": "Milestones",
+      "milestoneStatus": {
+        "done": "Done",
+        "in-progress": "In progress",
+        "planned": "Planned"
+      },
+      "currentStatus": "Current status",
+      "metrics": "Metrics",
+      "skillsHeading": "Skills & tools"
+    }
   },
   "research": {
     "heading": "Research",

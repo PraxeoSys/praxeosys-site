@@ -4,6 +4,7 @@ import { projects } from "@data/projects";
 import { Link } from "@/i18n/navigation";
 import { buildAlternates, buildOpenGraph } from "@/lib/seo";
 import type { Locale } from "@/lib/types";
+import { buildProjectLabels } from "@/lib/projectLabels";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 
 export async function generateMetadata({
@@ -34,14 +35,7 @@ export default async function ProjectsArchivePage({
   setRequestLocale(locale);
   const t = await getTranslations("projects");
 
-  const labels = {
-    problem: t("problem"),
-    method: t("method"),
-    result: t("result"),
-    demo: t("demo"),
-    github: t("github"),
-    todoBadge: t("todoBadge"),
-  };
+  const labels = buildProjectLabels(t);
 
   return (
     <main className="mx-auto max-w-5xl flex-1 px-6 py-20">

@@ -2,6 +2,7 @@ import { getTranslations, getLocale } from "next-intl/server";
 import { projects } from "@data/projects";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
+import { buildProjectLabels } from "@/lib/projectLabels";
 import { ProjectGrid } from "./ProjectGrid";
 
 export async function ProjectsSection() {
@@ -10,14 +11,7 @@ export async function ProjectsSection() {
   const featured = projects.filter((p) => p.featured).slice(0, 5);
   const hasMore = projects.length > featured.length;
 
-  const labels = {
-    problem: t("problem"),
-    method: t("method"),
-    result: t("result"),
-    demo: t("demo"),
-    github: t("github"),
-    todoBadge: t("todoBadge"),
-  };
+  const labels = buildProjectLabels(t);
 
   return (
     <section id="projects" className="mx-auto max-w-5xl px-6 py-20">

@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import type { Locale } from "@/lib/types";
 import type { Project } from "@data/projects";
 import { ProjectCard } from "./ProjectCard";
@@ -5,14 +6,7 @@ import { ProjectCard } from "./ProjectCard";
 interface ProjectGridProps {
   projects: Project[];
   locale: Locale;
-  labels: {
-    problem: string;
-    method: string;
-    result: string;
-    demo: string;
-    github: string;
-    todoBadge: string;
-  };
+  labels: ComponentProps<typeof ProjectCard>["labels"];
 }
 
 export function ProjectGrid({ projects, locale, labels }: ProjectGridProps) {
