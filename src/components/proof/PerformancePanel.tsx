@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { performanceData } from "@data/performance";
 import { Panel } from "@/components/ui/Panel";
 import { Metric } from "@/components/ui/Metric";
+import { BootFrame } from "@/components/ui/BootFrame";
 import { EquityCurve } from "./EquityCurve";
 
 /**
@@ -15,28 +16,30 @@ export async function PerformancePanel() {
   const t = await getTranslations("proof.performance");
 
   return (
-    <Panel title={t("title")}>
-      <EquityCurve
-        series={performanceData.series}
-        equityLabel={t("equity")}
-        benchmarkLabel={t("benchmark")}
-      />
-
-      <div className="mt-5 flex flex-wrap gap-8">
-        <Metric label={t("sharpe")} value={performanceData.metrics.sharpe.toFixed(2)} accent />
-        <Metric
-          label={t("maxDrawdown")}
-          value={`${performanceData.metrics.maxDrawdownPct.toFixed(1)}%`}
+    <BootFrame>
+      <Panel title={t("title")}>
+        <EquityCurve
+          series={performanceData.series}
+          equityLabel={t("equity")}
+          benchmarkLabel={t("benchmark")}
         />
-        <Metric
-          label={t("runtime")}
-          value={`${performanceData.metrics.runtimeDays} ${t("days")}`}
-        />
-      </div>
 
-      <p className="mt-4 font-mono text-[11px] text-panel-foreground/50">
-        {t("disclaimer")}
-      </p>
-    </Panel>
+        <div className="mt-5 flex flex-wrap gap-8">
+          <Metric label={t("sharpe")} value={performanceData.metrics.sharpe.toFixed(2)} accent />
+          <Metric
+            label={t("maxDrawdown")}
+            value={`${performanceData.metrics.maxDrawdownPct.toFixed(1)}%`}
+          />
+          <Metric
+            label={t("runtime")}
+            value={`${performanceData.metrics.runtimeDays} ${t("days")}`}
+          />
+        </div>
+
+        <p className="mt-4 font-mono text-[11px] text-panel-foreground/50">
+          {t("disclaimer")}
+        </p>
+      </Panel>
+    </BootFrame>
   );
 }
