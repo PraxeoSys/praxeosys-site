@@ -21,11 +21,11 @@ export const siteConfig = {
   github: "PraxeoSys",
 
   social: {
-    /** TODO: 填写 X/Twitter 用户名（不含 @），如 "praxeosys"。留空则隐藏该入口 */
-    twitter: "",
+    /** X/Twitter 用户名（不含 @）。留空则隐藏该入口 */
+    twitter: "praxeosys",
 
-    /** TODO: 填写 Telegram 用户名（不含 @）。留空则隐藏该入口 */
-    telegram: "",
+    /** Telegram 用户名（不含 @）。留空则隐藏该入口 */
+    telegram: "praxeosys",
 
     /** 联系邮箱 */
     email: "johnnysinfiniteganme@gmail.com",
