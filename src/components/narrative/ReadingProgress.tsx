@@ -52,7 +52,7 @@ export function ReadingProgress({ ariaLabel }: ReadingProgressProps) {
     <div
       role="progressbar"
       aria-label={ariaLabel}
-      className="fixed inset-x-0 top-0 z-30 h-0.5 origin-left bg-border lg:hidden"
+      className="fixed inset-x-0 top-0 z-50 h-0.5 origin-left bg-border lg:hidden"
     >
       <div
         ref={barRef}
