@@ -18,7 +18,7 @@ export const siteConfig = {
   url: "https://proxeosys.com",
 
   /** GitHub 用户名，用于贡献热力图 API 与项目链接 */
-  github: "ProxeoSys",
+  github: "PraxeoSys",
 
   social: {
     /** TODO: 填写 X/Twitter 用户名（不含 @），如 "proxeosys"。留空则隐藏该入口 */
