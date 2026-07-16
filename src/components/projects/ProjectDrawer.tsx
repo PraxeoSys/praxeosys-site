@@ -61,10 +61,37 @@ export function ProjectDrawer({
 }: ProjectDrawerProps) {
   const [active, setActive] = useState(0);
   const trackWrapRef = useRef<HTMLDivElement>(null);
+  const scrollSyncTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isDesktop = useIsDesktop();
 
+  useEffect(() => {
+    return () => {
+      if (scrollSyncTimer.current) clearTimeout(scrollSyncTimer.current);
+    };
+  }, []);
+
+  // On desktop, `active` is the sole source of truth (drives the x
+  // transform below). On mobile there's no transform — native scroll
+  // owns position — so jumping to a tab/arrow-key press has to scroll
+  // the container imperatively instead of just updating state.
+  //
+  // behavior: "instant" here, not "smooth" — CSS scroll-snap-type
+  // combined with a JS-driven smooth scrollTo is a known Chrome rough
+  // edge: the snap-seeking logic and the scroll animation fight for
+  // control mid-flight and the scroll can stall partway (confirmed live:
+  // a tab-click landed at scrollLeft 1000 instead of the target 0 and
+  // just stopped there). Native touch swipes get their own smooth
+  // momentum from the browser regardless, so this only affects the
+  // explicit jump-to-tab case, where instant is an entirely normal UX.
   function go(next: number) {
-    setActive(Math.max(0, Math.min(TABS.length - 1, next)));
+    const clamped = Math.max(0, Math.min(TABS.length - 1, next));
+    setActive(clamped);
+    if (!isDesktop && trackWrapRef.current) {
+      trackWrapRef.current.scrollTo({
+        left: clamped * trackWrapRef.current.clientWidth,
+        behavior: "instant",
+      });
+    }
   }
 
   const regionLabel = labels.regionLabelTemplate.replace(
@@ -118,6 +145,31 @@ export function ProjectDrawer({
             onClose();
           }
         }}
+        onScroll={() => {
+          // Mobile only: native scroll is the sole positioning system there
+          // (see the transform note below), so sync the tab-color state
+          // from the physical swipe position instead of the other way
+          // around. Panels are exactly 100% width on mobile, so this is a
+          // clean round-trip with no fractional-peek math involved.
+          //
+          // Debounced rather than computed on every event: go() triggers a
+          // *programmatic* smooth scroll too, and this same handler fires
+          // continuously while that animation is in flight, transiently
+          // rounding to whatever index the scroll is passing through —
+          // which fights the click's own setActive and produces a visible
+          // flicker to the wrong tab before it self-corrects. Only syncing
+          // once scrolling has actually settled (no event for ~100ms)
+          // avoids the race entirely, whether the scroll was a user swipe
+          // or go()'s own scrollTo.
+          if (isDesktop) return;
+          if (scrollSyncTimer.current) clearTimeout(scrollSyncTimer.current);
+          scrollSyncTimer.current = setTimeout(() => {
+            const el = trackWrapRef.current;
+            if (!el) return;
+            const next = Math.round(el.scrollLeft / el.clientWidth);
+            setActive((prev) => (prev === next ? prev : next));
+          }, 100);
+        }}
         className="relative overflow-x-auto overflow-y-hidden sm:overflow-x-hidden [scroll-snap-type:x_mandatory] sm:[scroll-snap-type:none]"
       >
         <motion.div
@@ -125,7 +177,12 @@ export function ProjectDrawer({
           drag={isDesktop ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.12}
-          animate={{ x: `-${active * 80}%` }}
+          // Desktop: this transform is the only positioning system (track
+          // wrapper is overflow-x-hidden there). Mobile: native scroll owns
+          // position entirely — applying a transform on top of it would
+          // stack two positioning systems on the same element, which is
+          // exactly what caused the partial/blank-panel bug reported live.
+          animate={{ x: isDesktop ? `-${active * 80}%` : 0 }}
           transition={transitions.drawer}
           onDragEnd={(_, info) => {
             const threshold = 60;
@@ -159,7 +216,7 @@ function DirectionPanel({
       role="tabpanel"
       id={`${project.slug}-panel-direction`}
       aria-labelledby={`${project.slug}-tab-direction`}
-      className="w-[80%] shrink-0 space-y-4 p-4 [scroll-snap-align:start] sm:w-[80%]"
+      className="w-full shrink-0 space-y-4 p-4 [scroll-snap-align:start] sm:w-[80%]"
     >
       <div>
         <p className="font-mono text-[11px] uppercase tracking-wider text-panel-foreground/50">
@@ -221,7 +278,7 @@ function ProgressPanel({
       role="tabpanel"
       id={`${project.slug}-panel-progress`}
       aria-labelledby={`${project.slug}-tab-progress`}
-      className="w-[80%] shrink-0 space-y-4 p-4 [scroll-snap-align:start]"
+      className="w-full shrink-0 space-y-4 p-4 [scroll-snap-align:start] sm:w-[80%]"
     >
       <div>
         <p className="font-mono text-[11px] uppercase tracking-wider text-panel-foreground/50">
@@ -262,7 +319,7 @@ function SkillsPanel({
       role="tabpanel"
       id={`${project.slug}-panel-skills`}
       aria-labelledby={`${project.slug}-tab-skills`}
-      className="w-[80%] shrink-0 p-4 [scroll-snap-align:start]"
+      className="w-full shrink-0 p-4 [scroll-snap-align:start] sm:w-[80%]"
     >
       <p className="font-mono text-[11px] uppercase tracking-wider text-panel-foreground/50">
         {labels.skillsHeading}

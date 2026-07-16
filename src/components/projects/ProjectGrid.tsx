@@ -11,13 +11,14 @@ interface ProjectGridProps {
 
 export function ProjectGrid({ projects, locale, labels }: ProjectGridProps) {
   return (
-    <div className="grid gap-6 sm:grid-cols-2">
-      {projects.map((project) => (
+    <div className="space-y-8">
+      {projects.map((project, i) => (
         <ProjectCard
           key={project.slug}
           project={project}
           locale={locale}
           labels={labels}
+          index={i + 1}
         />
       ))}
     </div>
