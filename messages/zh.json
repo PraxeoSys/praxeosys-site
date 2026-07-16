@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "title": "Johnny — 在构建 ProxeoSys",
+    "description": "用经济学理解市场，用代码验证认知，用交易兑现判断。独立开发者、Web3 builder、交易员、量化研究者。"
+  },
+  "nav": {
+    "proof": "证据",
+    "projects": "项目",
+    "research": "研究",
+    "now": "现在",
+    "contact": "联系"
+  },
+  "theme": {
+    "toggleToLight": "切换到浅色模式",
+    "toggleToDark": "切换到深色模式"
+  },
+  "locale": {
+    "switchTo": "EN"
+  },
+  "hero": {
+    "kicker": "Johnny — 在构建 ProxeoSys",
+    "narrative": "用经济学理解市场，用代码验证认知，用交易兑现判断。",
+    "ctaProof": "查看证据",
+    "ctaResearch": "阅读研究",
+    "statusNow": "现在",
+    "statusGithub": "github",
+    "statusMarkets": "市场",
+    "statusWatching": "观察中",
+    "statusLoading": "加载中…"
+  },
+  "loop": {
+    "heading": "The Loop",
+    "subheading": "四种身份，一个流程。不是并列的标签，而是同一个认知闭环的先后环节。",
+    "nodeCta": "查看实例 →"
+  },
+  "proof": {
+    "heading": "Proof",
+    "subheading": "全站没有一句无凭据的自夸，这个板块就是证据本身。",
+    "github": {
+      "title": "GitHub 活跃度",
+      "totalCommits": "总提交数",
+      "activeWeeks": "活跃周数",
+      "loading": "正在加载贡献数据…",
+      "error": "暂时无法加载 GitHub 数据。",
+      "viewProfile": "查看主页 →"
+    },
+    "performance": {
+      "title": "策略业绩",
+      "equity": "净值",
+      "benchmark": "基准",
+      "sharpe": "夏普比率",
+      "maxDrawdown": "最大回撤",
+      "runtime": "运行时长",
+      "days": "天",
+      "disclaimer": "累计收益率，以 100 为基准，已脱敏，非绝对金额。"
+    },
+    "onchain": {
+      "title": "链上身份",
+      "copy": "复制",
+      "copied": "已复制",
+      "etherscan": "Etherscan →",
+      "debank": "DeBank →"
+    }
+  },
+  "projects": {
+    "heading": "Projects",
+    "subheading": "只展示已上线、可演示的项目。",
+    "problem": "问题",
+    "method": "方法",
+    "result": "结果",
+    "demo": "演示",
+    "github": "GitHub",
+    "todoBadge": "TODO — 待替换为真实项目",
+    "viewArchive": "查看全部项目 →",
+    "archiveTitle": "全部项目",
+    "archiveSubheading": "完整归档，含首页未展示的项目。",
+    "backHome": "← 返回首页"
+  },
+  "research": {
+    "heading": "Research",
+    "subheading": "记录假设、市场结构观察与诚实复盘的数字花园。",
+    "readMore": "阅读 →",
+    "viewAll": "查看全部研究 →",
+    "backToList": "← 全部研究",
+    "minRead": "分钟阅读",
+    "tableOfContents": "本页目录",
+    "allTag": "全部",
+    "tags": {
+      "macro": "宏观经济",
+      "market-structure": "市场结构",
+      "quant": "量化研究",
+      "web3": "Web3",
+      "review": "复盘",
+      "essay": "随笔"
+    },
+    "empty": "该分类下暂无文章。"
+  },
+  "now": {
+    "heading": "Now",
+    "subheading": "我现在正在专注的事。",
+    "focus": "专注",
+    "researching": "在研究",
+    "watching": "在观察",
+    "updatedAt": "最后更新"
+  },
+  "contact": {
+    "heading": "Contact",
+    "prompt": "$ connect --via"
+  },
+  "footer": {
+    "tagline": "用经济学理解市场，用代码验证认知，用交易兑现判断。"
+  }
+}

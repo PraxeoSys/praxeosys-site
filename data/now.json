@@ -1,0 +1,13 @@
+{
+  "updatedAt": "2026-07-16",
+  "en": {
+    "focus": "TODO: what you are focused on right now (e.g. \"Rebuilding a mean-reversion signal for BTC perp funding\")",
+    "researching": "TODO: the open question you are currently researching",
+    "watching": "TODO: the market opportunity you are watching and why"
+  },
+  "zh": {
+    "focus": "TODO：填写你当前最主要的专注方向（例如「重构 BTC 永续资金费率均值回归信号」）",
+    "researching": "TODO：填写你正在研究的核心问题",
+    "watching": "TODO：填写你正在观察的市场机会及原因"
+  }
+}

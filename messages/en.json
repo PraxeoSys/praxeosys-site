@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "title": "Johnny — building ProxeoSys",
+    "description": "I read markets through economics, test beliefs with code, and settle them with trades. Independent developer, Web3 builder, trader, and quant researcher."
+  },
+  "nav": {
+    "proof": "Proof",
+    "projects": "Projects",
+    "research": "Research",
+    "now": "Now",
+    "contact": "Contact"
+  },
+  "theme": {
+    "toggleToLight": "Switch to light mode",
+    "toggleToDark": "Switch to dark mode"
+  },
+  "locale": {
+    "switchTo": "中文"
+  },
+  "hero": {
+    "kicker": "Johnny — building ProxeoSys",
+    "narrative": "I read markets through economics, test beliefs with code, and settle them with trades.",
+    "ctaProof": "View Proof",
+    "ctaResearch": "Read Research",
+    "statusNow": "now",
+    "statusGithub": "github",
+    "statusMarkets": "markets",
+    "statusWatching": "watching",
+    "statusLoading": "loading…"
+  },
+  "loop": {
+    "heading": "The Loop",
+    "subheading": "Four identities, one process. Not parallel labels — sequential stages of the same cognitive loop.",
+    "nodeCta": "See it in practice →"
+  },
+  "proof": {
+    "heading": "Proof",
+    "subheading": "No claim on this site is unbacked. This section is the evidence.",
+    "github": {
+      "title": "GitHub activity",
+      "totalCommits": "total commits",
+      "activeWeeks": "active weeks",
+      "loading": "Loading contribution data…",
+      "error": "Could not load GitHub data right now.",
+      "viewProfile": "View profile →"
+    },
+    "performance": {
+      "title": "Strategy performance",
+      "equity": "Equity",
+      "benchmark": "Benchmark",
+      "sharpe": "Sharpe",
+      "maxDrawdown": "Max drawdown",
+      "runtime": "Runtime",
+      "days": "days",
+      "disclaimer": "Cumulative return, indexed to 100. Not absolute size."
+    },
+    "onchain": {
+      "title": "On-chain identity",
+      "copy": "Copy",
+      "copied": "Copied",
+      "etherscan": "Etherscan →",
+      "debank": "DeBank →"
+    }
+  },
+  "projects": {
+    "heading": "Projects",
+    "subheading": "Shipped, demoable work only.",
+    "problem": "Problem",
+    "method": "Method",
+    "result": "Result",
+    "demo": "Demo",
+    "github": "GitHub",
+    "todoBadge": "TODO — replace with a real project",
+    "viewArchive": "View all projects →",
+    "archiveTitle": "All projects",
+    "archiveSubheading": "The full archive, including work not featured on the homepage.",
+    "backHome": "← Back home"
+  },
+  "research": {
+    "heading": "Research",
+    "subheading": "A digital garden of theses, market structure notes, and honest post-mortems.",
+    "readMore": "Read →",
+    "viewAll": "View all research →",
+    "backToList": "← All research",
+    "minRead": "min read",
+    "tableOfContents": "On this page",
+    "allTag": "All",
+    "tags": {
+      "macro": "Macro",
+      "market-structure": "Market Structure",
+      "quant": "Quant Research",
+      "web3": "Web3",
+      "review": "Review",
+      "essay": "Essays"
+    },
+    "empty": "No articles yet in this category."
+  },
+  "now": {
+    "heading": "Now",
+    "subheading": "What I'm focused on, right now.",
+    "focus": "Focus",
+    "researching": "Researching",
+    "watching": "Watching",
+    "updatedAt": "Last updated"
+  },
+  "contact": {
+    "heading": "Contact",
+    "prompt": "$ connect --via"
+  },
+  "footer": {
+    "tagline": "I read markets through economics, test beliefs with code, and settle them with trades."
+  }
+}
