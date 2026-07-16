@@ -8,11 +8,11 @@ export function Header() {
   const t = useTranslations("nav");
 
   const navItems: Array<{ key: "proof" | "projects" | "research" | "now" | "contact"; href: Parameters<typeof Link>[0]["href"] }> = [
-    { key: "proof", href: { pathname: "/", hash: "proof" } },
-    { key: "projects", href: { pathname: "/", hash: "projects" } },
+    { key: "proof", href: "/#proof" },
+    { key: "projects", href: "/#projects" },
     { key: "research", href: "/research" },
-    { key: "now", href: { pathname: "/", hash: "now" } },
-    { key: "contact", href: { pathname: "/", hash: "contact" } },
+    { key: "now", href: "/#now" },
+    { key: "contact", href: "/#contact" },
   ];
 
   return (

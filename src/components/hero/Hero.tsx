@@ -18,7 +18,7 @@ export function Hero() {
 
       <div className="flex flex-wrap gap-4 pt-2">
         <Link
-          href={{ pathname: "/", hash: "proof" }}
+          href="/#proof"
           className="rounded-panel bg-accent px-5 py-2.5 font-mono text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
         >
           {t("ctaProof")}
