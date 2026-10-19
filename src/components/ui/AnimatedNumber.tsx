@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "@/lib/useInView";
 
 interface AnimatedNumberProps {
   value: number;
@@ -12,34 +11,56 @@ interface AnimatedNumberProps {
   className?: string;
 }
 
-/** Counts up to `value` once it scrolls into view. No-op (renders final value immediately) if the user prefers reduced motion. */
+/**
+ * Server HTML is the real value, never a placeholder 0. The count-up runs
+ * only after hydration, and only if the figure starts below the fold — an
+ * above-the-fold number stays put so it doesn't flash down to zero.
+ */
 export function AnimatedNumber({
   value,
   decimals = 0,
   prefix = "",
   suffix = "",
-  durationMs = 900,
+  durationMs = 700,
   className,
 }: AnimatedNumberProps) {
-  const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.4 });
-  // If the user prefers reduced motion, useInView already starts `inView`
-  // true — start the display at the final value so we skip the rAF loop.
-  const [display, setDisplay] = useState(() => (inView ? value : 0));
-  const started = useRef(inView);
+  const ref = useRef<HTMLSpanElement>(null);
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
-    if (!inView || started.current) return;
-    started.current = true;
+    const node = ref.current;
+    if (!node) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const start = performance.now();
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / durationMs, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(value * eased);
-      if (progress < 1) requestAnimationFrame(tick);
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) return;
+
+    let started = false;
+    let frame = 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || started) return;
+        started = true;
+        observer.disconnect();
+        const start = performance.now();
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / durationMs, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setDisplay(value * eased);
+          if (progress < 1) frame = requestAnimationFrame(tick);
+        };
+        setDisplay(0);
+        frame = requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 },
+    );
+
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
     };
-    requestAnimationFrame(tick);
-  }, [inView, value, durationMs]);
+  }, [value, durationMs]);
 
   return (
     <span ref={ref} className={className}>

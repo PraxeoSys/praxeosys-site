@@ -5,23 +5,24 @@
 :root {
   color-scheme: dark;
 
-  /* editorial surface */
-  --background: #121212;
-  --foreground: #ededed;
-  --foreground-muted: #9a9a9a;
-  --border: #262626;
+  /* warm ink, not flat gray */
+  --background: #0e0e0c;
+  --foreground: #f3f0e7;
+  --foreground-muted: #9c978c;
+  --border: #2c2b24;
+  --surface: #17170f;
 
   /* terminal panel (always dark, regardless of theme) */
-  --panel-background: #0a0a0a;
-  --panel-foreground: #e6e6e6;
-  --panel-border: #232323;
+  --panel-background: #0a0a08;
+  --panel-foreground: #f3f0e7;
+  --panel-border: #2e2c22;
 
-  /* single accent, amber */
-  --accent: #ffb000;
-  --accent-foreground: #0a0a0a;
-  --accent-ink: #8a5a00;
+  /* brass — a signal, not a fill */
+  --accent: #e4b15a;
+  --accent-foreground: #1a1408;
+  --accent-ink: #8a5e12;
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
   /* motion tokens — keep in sync with src/lib/motion.ts (no build-time link) */
   --motion-duration-fast: 150ms;
@@ -33,23 +34,28 @@
 :root[data-theme="light"],
 :root.light {
   color-scheme: light;
-  --background: #faf9f6;
-  --foreground: #171715;
-  --foreground-muted: #6b6b66;
-  --border: #e2e2dc;
+  --background: #f4f1ea;
+  --foreground: #1c1b16;
+  --foreground-muted: #6f6a60;
+  --border: #e4ddd0;
+  --surface: #fbf9f4;
 
-  --accent: #ffb000;
-  --accent-foreground: #0a0a0a;
-  --accent-ink: #8a5a00;
+  --accent: #8f6214;
+  --accent-foreground: #fffaf2;
+  --accent-ink: #8f6214;
 }
 
 @media (prefers-color-scheme: light) {
   :root:not(.dark):not([data-theme="dark"]) {
     color-scheme: light;
-    --background: #faf9f6;
-    --foreground: #171715;
-    --foreground-muted: #6b6b66;
-    --border: #e2e2dc;
+    --background: #f4f1ea;
+    --foreground: #1c1b16;
+    --foreground-muted: #6f6a60;
+    --border: #e4ddd0;
+    --surface: #fbf9f4;
+    --accent: #8f6214;
+    --accent-foreground: #fffaf2;
+    --accent-ink: #8f6214;
   }
 }
 
@@ -58,6 +64,7 @@
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
   --color-border: var(--border);
+  --color-surface: var(--surface);
 
   --color-panel-background: var(--panel-background);
   --color-panel-foreground: var(--panel-foreground);
@@ -67,11 +74,13 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-ink: var(--accent-ink);
 
-  --font-sans: var(--font-inter), "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "Noto Sans SC", sans-serif;
-  --font-serif: var(--font-source-serif), "Songti SC", "Noto Serif SC", serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular",
-    Menlo, monospace;
+  --font-sans: var(--font-instrument-sans), "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans SC", "Microsoft YaHei", "Source Han Sans SC", sans-serif;
+  --font-serif: var(--font-source-serif), "Songti SC", "Noto Serif SC",
+    "Source Han Serif SC", "STSong", serif;
+  /* Latin mono first; Chinese glyphs fall through per-character to a CJK face. */
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, "SFMono-Regular", Menlo,
+    "PingFang SC", "Noto Sans SC", "Microsoft YaHei", monospace;
 
   --radius-panel: var(--radius);
 }
@@ -86,10 +95,26 @@ html {
     scroll-behavior: auto;
   }
 
-  /* Escape hatch for decorative CSS-only scroll-driven effects (e.g. the
-     reading-progress bar) that motion.ts/MotionConfig can't reach directly. */
-  [data-motion-decorative] {
+  /* Displacement and looping motion stop. Opacity fades (reveal, page
+     transitions, palette) stay — shorter, but not removed. */
+  [data-motion-decorative],
+  .hero-field::after,
+  .loop-return,
+  .type-caret,
+  .type-mask {
     animation: none !important;
+  }
+
+  .type-mask {
+    width: auto !important;
+  }
+
+  .type-caret {
+    display: none;
+  }
+
+  .reveal-wait {
+    transform: none;
   }
 }
 
@@ -118,6 +143,16 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  line-height: 1.65;
+}
+
+html[lang="zh"] body {
+  line-height: 1.75;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
 ::selection {
@@ -169,4 +204,262 @@ body {
 .prose-article pre code {
   background: transparent;
   padding: 0;
+}
+
+/* ---- hero field: grid + a slow brass glow. Content is not animated. ---- */
+.hero-field {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 7%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 85% 75% at 70% 20%, #000 15%, transparent 72%);
+}
+
+.hero-field::after {
+  content: "";
+  position: absolute;
+  inset: -15%;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 42% 36% at 82% 12%, color-mix(in oklab, var(--accent) 28%, transparent), transparent 62%),
+    radial-gradient(ellipse 36% 30% at 8% 88%, color-mix(in oklab, var(--foreground) 8%, transparent), transparent 70%);
+  animation: hero-glow 18s var(--motion-ease-standard) infinite alternate;
+}
+
+.hero-noise {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");
+}
+
+@keyframes hero-glow {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-2%, 1.5%, 0);
+  }
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  text-decoration: none;
+  transition: background-size var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+.spotlight {
+  position: relative;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--motion-duration-base) var(--motion-ease-standard);
+  background: radial-gradient(
+    380px circle at var(--sx, 50%) var(--sy, 0%),
+    color-mix(in oklab, var(--accent) 16%, transparent),
+    transparent 42%
+  );
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight::before {
+    display: none;
+  }
+}
+
+.magnetic {
+  display: inline-flex;
+  transition: transform var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.reveal-wait {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--motion-duration-entrance) var(--motion-ease-standard),
+    transform var(--motion-duration-entrance) var(--motion-ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-in {
+    transition: opacity 180ms linear;
+  }
+}
+
+.type-line {
+  display: inline-grid;
+  max-width: 100%;
+}
+
+.type-line > * {
+  grid-area: 1 / 1;
+}
+
+.type-mask {
+  overflow: hidden;
+  width: 0;
+  white-space: nowrap;
+  animation: type-reveal 1.6s steps(34, end) forwards;
+}
+
+@keyframes type-reveal {
+  to {
+    width: 100%;
+  }
+}
+
+.type-caret {
+  display: inline-block;
+  width: 0.55ch;
+  height: 0.9em;
+  margin-left: 2px;
+  vertical-align: -0.05em;
+  background: var(--color-accent);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.status-skeleton {
+  animation: skeleton-fade 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-fade {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-skeleton {
+    animation: none;
+  }
+}
+
+.loop-return {
+  stroke-dasharray: 10 160;
+  animation: loop-dash 3.2s linear infinite;
+}
+
+@keyframes loop-dash {
+  to {
+    stroke-dashoffset: -170;
+  }
+}
+
+.palette-in {
+  animation: palette-in 180ms var(--motion-ease-standard);
+}
+
+@keyframes palette-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .palette-in {
+    animation: palette-fade 120ms linear;
+  }
+}
+
+@keyframes palette-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+::view-transition-old(.page) {
+  animation: 200ms var(--motion-ease-standard) both page-out;
+}
+
+::view-transition-new(.page) {
+  animation: 240ms var(--motion-ease-standard) both page-in;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(.page),
+  ::view-transition-new(.page) {
+    animation-duration: 100ms;
+  }
+}
+
+.article-link {
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0 100%;
+  transition: background-size var(--motion-duration-base) var(--motion-ease-standard);
+}
+
+.article-link:hover,
+.article-link:focus-visible {
+  background-size: 2px 100%;
 }

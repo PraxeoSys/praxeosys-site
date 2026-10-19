@@ -5,6 +5,7 @@ import { Link, redirect } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { buildAlternates, buildOpenGraph } from "@/lib/seo";
 import type { Locale } from "@/lib/types";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { ArticleList } from "@/components/research/ArticleList";
 
 const TAGS: ResearchTag[] = [
@@ -76,8 +77,9 @@ export default async function ResearchListPage({
   };
 
   return (
+    <PageTransition>
     <main className="mx-auto max-w-5xl flex-1 px-6 py-20">
-      <h1 className="font-serif text-2xl text-foreground sm:text-3xl">
+      <h1 className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
         {t("heading")}
       </h1>
       <p className="mt-2 max-w-2xl text-foreground-muted">{t("subheading")}</p>
@@ -121,5 +123,6 @@ export default async function ResearchListPage({
         />
       </div>
     </main>
+    </PageTransition>
   );
 }

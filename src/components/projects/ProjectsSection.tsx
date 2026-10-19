@@ -15,13 +15,13 @@ export async function ProjectsSection() {
 
   return (
     <section id="projects" className="mx-auto max-w-5xl px-6 py-20">
-      <h2 className="font-serif text-2xl text-foreground sm:text-3xl">
+      <h2 className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
         {t("heading")}
       </h2>
       <p className="mt-2 max-w-2xl text-foreground-muted">{t("subheading")}</p>
 
       <div className="mt-10">
-        <ProjectGrid projects={featured} locale={locale} labels={labels} />
+        <ProjectGrid projects={featured} locale={locale} labels={labels} emphasizeFirst />
       </div>
 
       {hasMore && (

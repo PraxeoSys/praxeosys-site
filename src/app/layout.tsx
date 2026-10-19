@@ -1,9 +1,9 @@
 import Script from "next/script";
-import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Instrument_Sans, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -14,9 +14,10 @@ const sourceSerif = Source_Serif_4({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${sourceSerif.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
+      className={`${instrumentSans.variable} ${sourceSerif.variable} ${ibmPlexMono.variable} h-full antialiased dark`}
     >
       <head>
         <Script

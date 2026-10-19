@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { siteConfig } from "@data/site-config";
+import { CommandButton } from "./CommandPalette";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -11,7 +12,7 @@ export function Header() {
     { key: "proof", href: "/#proof" },
     { key: "projects", href: "/#projects" },
     { key: "research", href: "/research" },
-    { key: "now", href: "/#now" },
+    { key: "now", href: "/now" },
     { key: "contact", href: "/#contact" },
   ];
 
@@ -34,7 +35,7 @@ export function Header() {
             <Link
               key={item.key}
               href={item.href}
-              className="font-mono text-xs uppercase tracking-wider text-foreground-muted transition-colors hover:text-accent"
+              className="link-underline font-mono text-xs uppercase tracking-wider text-foreground-muted transition-colors hover:text-accent"
             >
               {t(item.key)}
             </Link>
@@ -42,6 +43,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <CommandButton />
           <LocaleSwitch />
           <ThemeToggle />
         </div>

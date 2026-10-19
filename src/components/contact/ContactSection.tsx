@@ -24,7 +24,7 @@ export async function ContactSection() {
 
   return (
     <section id="contact" className="mx-auto max-w-5xl px-6 py-20">
-      <h2 className="font-serif text-2xl text-foreground sm:text-3xl">
+      <h2 className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
         {t("heading")}
       </h2>
 
@@ -39,7 +39,7 @@ export async function ContactSection() {
                   href={channel.href}
                   target={channel.key === "mail" ? undefined : "_blank"}
                   rel={channel.key === "mail" ? undefined : "noreferrer"}
-                  className="text-accent hover:underline"
+                  className="link-underline text-accent"
                 >
                   {channel.key}
                 </a>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { useInView } from "@/lib/useInView";
@@ -23,6 +23,7 @@ export function LoopDiagram({ nodes, ctaLabel }: LoopDiagramProps) {
   const [openId, setOpenId] = useState<string | null>(nodes[0]?.id ?? null);
   const openNode = nodes.find((n) => n.id === openId) ?? null;
   const { ref: gridRef, inView } = useInView<HTMLDivElement>({ threshold: 0.3 });
+  const reduced = useReducedMotion();
 
   return (
     <div className="mt-10">
@@ -40,13 +41,16 @@ export function LoopDiagram({ nodes, ctaLabel }: LoopDiagramProps) {
                 opacity-only overlay behind the button, the existing openId
                 accordion state/behavior above is completely untouched.
               */}
-              <motion.span
+              <m.span
                 aria-hidden
                 data-motion-decorative
                 className="pointer-events-none absolute inset-0 rounded-panel bg-accent/10 ring-1 ring-accent/40"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: inView ? 1 : 0 }}
-                transition={{ ...transitions.reveal, delay: i * 0.08 }}
+                transition={{
+                  duration: reduced ? 0.2 : transitions.reveal.duration,
+                  delay: reduced ? 0 : i * 0.08,
+                }}
               />
               <button
                 type="button"
@@ -116,6 +120,7 @@ export function LoopDiagram({ nodes, ctaLabel }: LoopDiagramProps) {
             stroke="currentColor"
             strokeWidth="0.6"
             markerEnd="url(#loop-return-arrow)"
+            className={!reduced && inView ? "loop-return" : undefined}
           />
         </svg>
       </div>

@@ -10,6 +10,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HtmlLangSync } from "@/components/layout/HtmlLangSync";
 import { MotionRoot } from "@/components/layout/MotionRoot";
+import { CommandProvider } from "@/components/layout/CommandPalette";
+import { ReadingProgress } from "@/components/narrative/ReadingProgress";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -52,14 +54,18 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
+  const progressLabel = (await getTranslations("chapterRail"))("progressAriaLabel");
 
   return (
     <NextIntlClientProvider>
       <MotionRoot>
-        <HtmlLangSync />
-        <Header />
-        {children}
-        <Footer />
+        <CommandProvider>
+          <HtmlLangSync />
+          <ReadingProgress ariaLabel={progressLabel} />
+          <Header />
+          {children}
+          <Footer />
+        </CommandProvider>
       </MotionRoot>
     </NextIntlClientProvider>
   );
