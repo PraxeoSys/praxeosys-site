@@ -34,6 +34,7 @@
     "ctaProof": "View Proof",
     "ctaResearch": "Read Research",
     "ctaContact": "Work with me",
+    "terminal": "$ agent.status --as-of {date}",
     "statusNow": "now",
     "statusGithub": "github",
     "statusMarkets": "markets",
@@ -85,6 +86,7 @@
     "demo": "Demo",
     "github": "GitHub",
     "todoBadge": "TODO — replace with a real project",
+    "featured": "Featured",
     "viewArchive": "View all projects →",
     "archiveTitle": "All projects",
     "archiveSubheading": "The full archive, including work not featured on the homepage.",
@@ -144,6 +146,47 @@
     "prompt": "$ connect --via"
   },
   "footer": {
-    "tagline": "An independent builder who turns institutional-economics judgment into falsifiable trading systems and agent tools, and documents the build in public."
+    "tagline": "An independent builder who turns institutional-economics judgment into falsifiable trading systems and agent tools, and documents the build in public.",
+    "palette": "⌘K to jump"
+  },
+  "status": {
+    "title": "System status",
+    "asOf": "as of {date}",
+    "notLive": "Published snapshot. Not a live feed, and not a track record.",
+    "agent": "BTC analysis agent",
+    "agentState": "Analysis only",
+    "agentDetail": "No order authority. This page does not claim the scheduled job is still running.",
+    "version": "version",
+    "forecasts": "Forecasts",
+    "logged": "logged",
+    "scored": "scored",
+    "hits": "direction hits",
+    "sample": "Scored sample is n={count}. Too small to claim skill.",
+    "research": "Research notes",
+    "researchScope": "Published in this language",
+    "latest": "latest {date}",
+    "github": "GitHub",
+    "contributions": "public contributions",
+    "activeWeeks": "active weeks",
+    "githubScope": "Public repositories only, last 12 months.",
+    "push": "latest public event",
+    "unavailable": "unavailable",
+    "openAgent": "Open the agent project",
+    "openResearch": "Open research",
+    "openGithub": "Open GitHub"
+  },
+  "command": {
+    "open": "Open command palette",
+    "close": "Close command palette",
+    "placeholder": "Jump to…",
+    "empty": "No matching page.",
+    "label": "Command palette",
+    "hint": "⌘K",
+    "home": "Home",
+    "status": "System status",
+    "loop": "The Loop",
+    "archive": "All projects",
+    "eggTitle": "axiom",
+    "eggBody": "Praxeology: human action is the datum. Everything else on this site is a hypothesis with a date."
   }
 }

@@ -1,11 +1,22 @@
 import { ImageResponse } from "next/og";
 import { getTranslations } from "next-intl/server";
-import { getArticleBySlug } from "@/lib/mdx";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
+import { getArticleBySlug, getArticleSlugs } from "@/lib/mdx";
 import { OgCard, OG_IMAGE_SIZE } from "@/lib/og";
 import type { Locale } from "@/lib/types";
 
 export const size = OG_IMAGE_SIZE;
 export const contentType = "image/png";
+
+// Same gate as the article page: a slug with no published file is not a route.
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return routing.locales.flatMap((locale) =>
+    getArticleSlugs(locale).map((slug) => ({ locale, slug })),
+  );
+}
 
 export default async function Image({
   params,
@@ -15,16 +26,14 @@ export default async function Image({
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "research" });
 
-  let title = t("heading");
-  let subtitle: string | undefined;
-
+  let article;
   try {
-    const article = getArticleBySlug(locale as Locale, slug);
-    title = article.title;
-    subtitle = article.summary;
+    article = getArticleBySlug(locale as Locale, slug);
   } catch {
-    // fall back to the generic research heading above
+    notFound();
   }
+  const title = article.title;
+  const subtitle = article.summary;
 
   return new ImageResponse(
     <OgCard kicker={t("heading")} title={title} subtitle={subtitle} />,

@@ -34,6 +34,7 @@
     "ctaProof": "查看证据",
     "ctaResearch": "阅读研究",
     "ctaContact": "与我合作",
+    "terminal": "$ agent.status --as-of {date}",
     "statusNow": "现在",
     "statusGithub": "github",
     "statusMarkets": "市场",
@@ -85,6 +86,7 @@
     "demo": "演示",
     "github": "GitHub",
     "todoBadge": "TODO — 待替换为真实项目",
+    "featured": "重点",
     "viewArchive": "查看全部项目 →",
     "archiveTitle": "全部项目",
     "archiveSubheading": "完整归档，含首页未展示的项目。",
@@ -144,6 +146,47 @@
     "prompt": "$ connect --via"
   },
   "footer": {
-    "tagline": "独立构建者：把制度经济学的判断做成可证伪的交易系统和 Agent 工具，并把构建过程公开写下来。"
+    "tagline": "独立构建者：把制度经济学的判断做成可证伪的交易系统和 Agent 工具，并把构建过程公开写下来。",
+    "palette": "⌘K 跳转"
+  },
+  "status": {
+    "title": "系统状态",
+    "asOf": "截至 {date}",
+    "notLive": "已发布的快照。不是实时数据，也不是业绩记录。",
+    "agent": "BTC 分析 Agent",
+    "agentState": "只分析",
+    "agentDetail": "没有下单权限。本页不声称计划任务仍在运行。",
+    "version": "版本",
+    "forecasts": "预测",
+    "logged": "已记录",
+    "scored": "已评分",
+    "hits": "方向命中",
+    "research": "研究笔记",
+    "researchScope": "本语言已发布",
+    "latest": "最近 {date}",
+    "github": "GitHub",
+    "contributions": "公开贡献",
+    "activeWeeks": "活跃周",
+    "githubScope": "仅公开仓库，近 12 个月。",
+    "push": "最近一次公开事件",
+    "unavailable": "暂不可用",
+    "openAgent": "打开 Agent 项目",
+    "openResearch": "打开研究",
+    "openGithub": "打开 GitHub",
+    "sample": "已评分样本 n={count}。太小，证明不了能力。"
+  },
+  "command": {
+    "open": "打开命令面板",
+    "close": "关闭命令面板",
+    "placeholder": "跳转到…",
+    "empty": "没有匹配的页面。",
+    "label": "命令面板",
+    "hint": "⌘K",
+    "home": "首页",
+    "status": "系统状态",
+    "loop": "The Loop",
+    "archive": "全部项目",
+    "eggTitle": "公理",
+    "eggBody": "实践论：人的行动是材料。这个站上的其余内容，都是带日期的假设。"
   }
 }

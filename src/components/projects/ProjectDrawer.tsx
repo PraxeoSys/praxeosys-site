@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import type { Project } from "@data/projects";
 import type { Locale } from "@/lib/types";
 import { cn } from "@/lib/cn";
@@ -63,6 +63,7 @@ export function ProjectDrawer({
   const trackWrapRef = useRef<HTMLDivElement>(null);
   const scrollSyncTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isDesktop = useIsDesktop();
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     return () => {
@@ -172,7 +173,7 @@ export function ProjectDrawer({
         }}
         className="relative overflow-x-auto overflow-y-hidden sm:overflow-x-hidden [scroll-snap-type:x_mandatory] sm:[scroll-snap-type:none]"
       >
-        <motion.div
+        <m.div
           className="flex"
           drag={isDesktop ? "x" : false}
           dragConstraints={{ left: 0, right: 0 }}
@@ -183,7 +184,7 @@ export function ProjectDrawer({
           // stack two positioning systems on the same element, which is
           // exactly what caused the partial/blank-panel bug reported live.
           animate={{ x: isDesktop ? `-${active * 80}%` : 0 }}
-          transition={transitions.drawer}
+          transition={reduced ? { duration: 0 } : transitions.drawer}
           onDragEnd={(_, info) => {
             const threshold = 60;
             if (info.offset.x < -threshold || info.velocity.x < -400) {
@@ -196,7 +197,7 @@ export function ProjectDrawer({
           <DirectionPanel project={project} locale={locale} labels={labels} />
           <ProgressPanel project={project} locale={locale} labels={labels} />
           <SkillsPanel project={project} labels={labels} />
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { buildAlternates, buildOpenGraph } from "@/lib/seo";
 import type { Locale } from "@/lib/types";
 import { buildProjectLabels } from "@/lib/projectLabels";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 
 export async function generateMetadata({
@@ -38,6 +39,7 @@ export default async function ProjectsArchivePage({
   const labels = buildProjectLabels(t);
 
   return (
+    <PageTransition>
     <main className="mx-auto max-w-5xl flex-1 px-6 py-20">
       <Link
         href="/"
@@ -46,7 +48,7 @@ export default async function ProjectsArchivePage({
         {t("backHome")}
       </Link>
 
-      <h1 className="mt-6 font-serif text-2xl text-foreground sm:text-3xl">
+      <h1 className="mt-6 font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
         {t("archiveTitle")}
       </h1>
       <p className="mt-2 max-w-2xl text-foreground-muted">
@@ -57,5 +59,6 @@ export default async function ProjectsArchivePage({
         <ProjectGrid projects={projects} locale={locale} labels={labels} />
       </div>
     </main>
+    </PageTransition>
   );
 }

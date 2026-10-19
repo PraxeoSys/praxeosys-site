@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing";
 import { siteConfig } from "@data/site-config";
 import { getAllArticles } from "@/lib/mdx";
 
-const STATIC_PATHS = ["", "/projects", "/research"];
+const STATIC_PATHS = ["", "/projects", "/research", "/now"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];

@@ -11,7 +11,7 @@ export async function NowSection() {
 
   return (
     <div id="now">
-      <h2 className="font-serif text-2xl text-foreground sm:text-3xl">
+      <h2 className="font-serif text-3xl tracking-tight text-foreground sm:text-4xl">
         {t("heading")}
       </h2>
       <p className="mt-2 max-w-2xl text-foreground-muted">{t("subheading")}</p>

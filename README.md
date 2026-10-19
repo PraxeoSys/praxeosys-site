@@ -84,5 +84,5 @@ src/
 - **i18n**: `next-intl`, locale-prefixed routes (`/en`, `/zh`), default locale negotiated from the browser via middleware.
 - **Content**: MDX via `next-mdx-remote/rsc` + `gray-matter`, no CMS.
 - **Charts**: hand-rolled SVG (no charting library) for the equity curve and GitHub heatmap.
-- **Theme**: dark-by-default "Quiet Terminal" theme with a light-mode toggle; the deep-charcoal terminal panels (Proof, Now, Contact) intentionally stay dark in both themes.
+- **Theme**: dark-by-default warm-ink theme with a light-mode toggle. Instrument Sans for text, Source Serif 4 for headlines, IBM Plex Mono for labels; Chinese falls back to system faces (PingFang, Noto Sans SC, Songti). The terminal panels (status, Proof, Now, Contact) stay dark in both themes.
 - **SEO**: per-page metadata, self-referencing canonical + full hreflang map (including `x-default`), dynamic OG images via `next/og`, `sitemap.ts`, `robots.ts`.

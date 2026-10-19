@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 const REVALIDATE_SECONDS = 60 * 60 * 24; // daily ISR refresh
 
 export interface ContributionDay {
@@ -33,7 +35,7 @@ function isContributionDay(value: unknown): value is ContributionDay {
  * instead of painting a zero. A successful empty year still returns 0, because that
  * zero is what the calendar actually contains.
  */
-export async function getContributions(
+export const getContributions = cache(async function getContributions(
   username: string,
 ): Promise<ContributionSummary | null> {
   try {
@@ -77,10 +79,10 @@ export async function getContributions(
   } catch {
     return null;
   }
-}
+});
 
-/** Most recent public push event timestamp, used for the Hero status bar. */
-export async function getLatestCommitAt(
+/** Most recent public event timestamp, used by the system-status panel. */
+export const getLatestCommitAt = cache(async function getLatestCommitAt(
   username: string,
 ): Promise<string | null> {
   try {
@@ -104,7 +106,7 @@ export async function getLatestCommitAt(
   } catch {
     return null;
   }
-}
+});
 
 function isoWeekKey(date: Date): string {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
