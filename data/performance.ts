@@ -4,19 +4,12 @@ import rawPerformanceData from "./performance.json";
  * ============================================================================
  *  策略业绩面板 — 数据源
  * ============================================================================
- * 当前状态：关闭（enabled: false）。这是有意为之——业绩数据必须等有完整、
- * 可辩护的实盘/回测记录之后再启用，宁缺毋假。关闭时 Proof 区不渲染该面板，
- * 由 GitHub 贡献卡自然填充空间。
+ * 当前状态：关闭，且没有序列。这是有意的。没有可公开、可辩护的业绩记录时，
+ * 不放任何数字——虚构的夏普、回撤、净值曲线一律不入库，避免被误打开。
  *
- * 上线步骤：
- *   1. 把 performance.json 换成真实数据（date/equity/benchmark 累计收益率序列，
- *      已脱敏为相对基准 100 的百分比，不展示绝对金额）。
- *   2. 把 enabled 改成 true。
- *
- * 未来接入交易所 API 时：
- *   在这里新增一个 fetchLivePerformance() async 函数，调用交易所/账户 API
- *   拉取真实权益曲线，替换 performanceData.series 的静态读取；
- *   保持返回类型（PerformanceData）不变，组件不需要跟着改。
+ * 绝对金额永不公开。将来若有真实记录，只写百分比和比率（累计收益、
+ * R 倍数、回撤），series 至少两个点，metrics 填实数，再把 enabled 改为 true。
+ * 缺序列或 metrics 为 null 时，面板不渲染，也不会显示 0。
  */
 
 export interface PerformancePoint {
@@ -25,15 +18,30 @@ export interface PerformancePoint {
   benchmark: number;
 }
 
+export interface PerformanceMetrics {
+  sharpe: number;
+  maxDrawdownPct: number;
+  runtimeDays: number;
+}
+
 export interface PerformanceData {
   enabled: boolean;
-  startingEquity: number;
-  metrics: {
-    sharpe: number;
-    maxDrawdownPct: number;
-    runtimeDays: number;
-  };
+  /** Indexed base (typically 100) once a real series exists. Null when there is no track record. */
+  startingEquity: number | null;
+  metrics: PerformanceMetrics | null;
   series: PerformancePoint[];
 }
 
 export const performanceData = rawPerformanceData as PerformanceData;
+
+/** True only when the file holds a real series. An enabled flag alone is not enough. */
+export function hasPublicTrackRecord(data: PerformanceData = performanceData): boolean {
+  return (
+    data.enabled &&
+    data.metrics !== null &&
+    data.series.length >= 2 &&
+    Number.isFinite(data.metrics.sharpe) &&
+    Number.isFinite(data.metrics.maxDrawdownPct) &&
+    Number.isFinite(data.metrics.runtimeDays)
+  );
+}

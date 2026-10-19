@@ -19,7 +19,7 @@ export function ArticleCard({
   readMoreLabel,
 }: ArticleCardProps) {
   return (
-    <article className="border-b border-border py-6 first:pt-0 last:border-b-0">
+    <article className="article-link border-b border-border py-6 pl-3 first:pt-0 last:border-b-0">
       <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-foreground-muted">
         <time dateTime={article.date}>{formatDate(article.date, locale)}</time>
         <span>·</span>
@@ -37,7 +37,7 @@ export function ArticleCard({
       </div>
 
       <h3 className="mt-2 font-serif text-xl text-foreground">
-        <Link href={`/research/${article.slug}`} className="hover:text-accent">
+        <Link href={`/research/${article.slug}`} className="link-underline hover:text-accent">
           {article.title}
         </Link>
       </h3>
@@ -45,7 +45,7 @@ export function ArticleCard({
 
       <Link
         href={`/research/${article.slug}`}
-        className="mt-2 inline-block font-mono text-xs text-accent hover:underline"
+        className="link-underline mt-2 inline-block font-mono text-xs text-accent"
       >
         {readMoreLabel}
       </Link>

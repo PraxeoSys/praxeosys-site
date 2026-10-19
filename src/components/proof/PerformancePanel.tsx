@@ -1,17 +1,20 @@
 import { getTranslations } from "next-intl/server";
-import { performanceData } from "@data/performance";
+import { hasPublicTrackRecord, performanceData } from "@data/performance";
 import { Panel } from "@/components/ui/Panel";
 import { Metric } from "@/components/ui/Metric";
 import { BootFrame } from "@/components/ui/BootFrame";
 import { EquityCurve } from "./EquityCurve";
 
 /**
- * Renders nothing when performanceData.enabled is false (see data/performance.ts
- * for why: no unverifiable performance claims on this site). The Proof grid's
- * GitHub card is full-width by design, so hiding this panel doesn't leave a gap.
+ * Renders nothing unless performance.json holds a real series (see
+ * data/performance.ts). An enabled flag with empty or null metrics must not
+ * paint zeros or a blank chart. The Proof grid's GitHub card is full-width
+ * by design, so hiding this panel doesn't leave a gap.
  */
 export async function PerformancePanel() {
-  if (!performanceData.enabled) return null;
+  if (!hasPublicTrackRecord(performanceData) || !performanceData.metrics) {
+    return null;
+  }
 
   const t = await getTranslations("proof.performance");
 

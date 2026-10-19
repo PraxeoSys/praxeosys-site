@@ -10,8 +10,10 @@ export function Footer() {
       <div className="mx-auto flex max-w-5xl flex-col gap-2 text-xs text-foreground-muted">
         <p className="font-mono">
           © {year} {siteConfig.brand}
+          <span className="mx-2 text-border">/</span>
+          <span>{t("palette")}</span>
         </p>
-        <p>{t("tagline")}</p>
+        <p className="max-w-2xl">{t("tagline")}</p>
       </div>
     </footer>
   );

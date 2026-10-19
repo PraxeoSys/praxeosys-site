@@ -1,13 +1,17 @@
 {
-  "updatedAt": "2026-07-16",
+  "updatedAt": "2026-10-19",
   "en": {
-    "focus": "TODO: what you are focused on right now (e.g. \"Rebuilding a mean-reversion signal for BTC perp funding\")",
-    "researching": "TODO: the open question you are currently researching",
-    "watching": "TODO: the market opportunity you are watching and why"
+    "focus": "A daily BTC/ETH/SOL swing-analysis agent that only analyzes — no order authority — with forecasts appended to a log and scored by a script. Alongside it, a personal dashboard that stays behind zero-trust access.",
+    "focusBrief": "BTC/ETH/SOL analysis agent, no order authority",
+    "researching": "Whether crypto trend-following edge is decaying. In backtests written up through 2026-09, a simple BTC breakout system's per-trade expectancy fell from +3.35R on the full sample to +0.93R after 2021-08, and adding more coins made the portfolio worse, not better.",
+    "watching": "Spot-ETF flows as an independent check on price moves. As of 2026-09-25 the data pipe was built but not fed by a live data key, so this is a hypothesis to test, not a signal.",
+    "watchingBrief": "ETF flows: a hypothesis, not a signal"
   },
   "zh": {
-    "focus": "TODO：填写你当前最主要的专注方向（例如「重构 BTC 永续资金费率均值回归信号」）",
-    "researching": "TODO：填写你正在研究的核心问题",
-    "watching": "TODO：填写你正在观察的市场机会及原因"
+    "focus": "搭建每日运行的 BTC/ETH/SOL 波段分析 Agent：只分析、没有下单权限，预测只追加进记录并由脚本打分。同时维护一套放在零信任访问之后的个人看板。",
+    "focusBrief": "BTC/ETH/SOL 分析 Agent，不下单",
+    "researching": "加密市场的趋势跟随优势是不是在衰减。在写到 2026-09 的回测里，一个简单 BTC 突破系统的单笔期望从全样本的 +3.35R 降到 2021-08 之后的 +0.93R；币种铺得越多，组合反而越差。",
+    "watching": "把现货 ETF 资金流当作价格变动的独立核对。截至 2026-09-25，数据管道已经搭好，但还没有接上实际的数据 key，所以目前只是待检验的假设，不是信号。",
+    "watchingBrief": "ETF 资金流：假设，不是信号"
   }
 }

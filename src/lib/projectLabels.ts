@@ -15,6 +15,7 @@ export function buildProjectLabels(t: ProjectsTranslator) {
     demo: t("demo"),
     github: t("github"),
     todoBadge: t("todoBadge"),
+    featured: t("featured"),
     expand: t("drawer.expand"),
     collapse: t("drawer.collapse"),
     tabsAriaLabel: t("drawer.tabsAriaLabel"),

@@ -10,6 +10,7 @@ import { Link } from "@/i18n/navigation";
 import { formatDate } from "@/lib/time";
 import { buildAlternates, buildOpenGraph } from "@/lib/seo";
 import type { Locale } from "@/lib/types";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Toc } from "@/components/research/Toc";
 
 export async function generateStaticParams({
@@ -75,6 +76,7 @@ export default async function ArticlePage({
   };
 
   return (
+    <PageTransition>
     <main className="mx-auto max-w-5xl flex-1 px-6 py-20">
       <Link
         href="/research"
@@ -130,5 +132,6 @@ export default async function ArticlePage({
         </aside>
       </div>
     </main>
+    </PageTransition>
   );
 }

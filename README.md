@@ -1,6 +1,6 @@
 # PraxeoSys — Johnny's personal site
 
-"I read markets through economics, test beliefs with code, and settle them with trades."
+"An independent builder who turns institutional-economics judgment into falsifiable trading systems and agent tools, and documents the build in public."
 
 Production personal site built on Next.js App Router + TypeScript + Tailwind CSS v4, with a bilingual (EN/ZH) "Quiet Terminal" design: editorial-minimal skeleton, terminal-style data panels for anything verifiable (GitHub activity, strategy performance, on-chain identity).
 
@@ -38,7 +38,7 @@ npm run lint     # eslint
 | "Now" section (focus / researching / watching) | `data/now.json` — also bump `updatedAt` |
 | The Loop's four node descriptions + links | `data/loop-nodes.ts` |
 | Projects (cards + expandable archive drawer on homepage + `/projects` archive) | `data/projects.ts` — set `featured: true` for the first 3–5 you want on the homepage; `status: "todo"` shows a TODO badge. Each project also needs `direction` (vision/roadmap/milestones), `progress` (status/metrics), and `skills` (string tags) — these fill the drawer's 01/02/03 panels. |
-| Strategy performance panel | `data/performance.json` — flip `enabled` to `true` once you have a real, defensible track record; replace the `series`/`metrics` with real data |
+| Strategy performance panel | `data/performance.json` — stays disabled and empty until there is a real track record. Do not commit invented figures or absolute dollar amounts. Percentages and ratios only, once they are real; then set `enabled` to `true` with at least two series points |
 | Research articles (the digital garden) | `content/en/research/*.mdx` and `content/zh/research/*.mdx` |
 
 ### Writing a research article
@@ -84,5 +84,5 @@ src/
 - **i18n**: `next-intl`, locale-prefixed routes (`/en`, `/zh`), default locale negotiated from the browser via middleware.
 - **Content**: MDX via `next-mdx-remote/rsc` + `gray-matter`, no CMS.
 - **Charts**: hand-rolled SVG (no charting library) for the equity curve and GitHub heatmap.
-- **Theme**: dark-by-default "Quiet Terminal" theme with a light-mode toggle; the deep-charcoal terminal panels (Proof, Now, Contact) intentionally stay dark in both themes.
+- **Theme**: dark-by-default warm-ink theme with a light-mode toggle. Instrument Sans for text, Source Serif 4 for headlines, IBM Plex Mono for labels; Chinese falls back to system faces (PingFang, Noto Sans SC, Songti). The terminal panels (status, Proof, Now, Contact) stay dark in both themes.
 - **SEO**: per-page metadata, self-referencing canonical + full hreflang map (including `x-default`), dynamic OG images via `next/og`, `sitemap.ts`, `robots.ts`.

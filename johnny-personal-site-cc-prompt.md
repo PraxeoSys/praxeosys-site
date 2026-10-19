@@ -63,7 +63,7 @@
 - 「随笔」为跨界内容（用金融框架解读生活），列表与文章页用轻微不同的视觉标记与 Research 类目区分；首页 Research 区优先展示复盘与研究类，随笔不置顶
 - 「复盘」是重点栏目：诚实记录交易回撤与修复过程的研究文章（哪里错了、策略怎么改、风控加了什么）——这是本站可信度的核心来源之一
 - 列表页 + 文章页，文章页排版按长文阅读优化（65ch 行宽、目录、阅读时间）
-- 我提供 3 篇现成 MDX 文章（随 prompt 附上 `site-content/` 目录，含 frontmatter）：《解剖乔家大院》（Research 置顶，featured: true）、《如果爱情是一只股票》（随笔）、《悉达多的河流》（复盘，draft: true 暂不发布）。直接导入使用，尊重 frontmatter 中的 category/featured/draft 字段
+- 我提供 2 篇现成 MDX 文章（随 prompt 附上 `site-content/` 目录，含 frontmatter）：《解剖乔家大院》（Research 置顶，featured: true）、《悉达多的河流》（复盘，draft: true 暂不发布）。直接导入使用，尊重 frontmatter 中的 category/featured/draft 字段
 
 ### 6. Now
 - 独立小节：当前专注、正在研究的问题、观察中的市场机会（手动维护的 MDX/JSON）

@@ -12,13 +12,14 @@ export default async function Image({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "hero" });
+  const t = await getTranslations({ locale, namespace: "meta" });
 
   return new ImageResponse(
     (
       <OgCard
         kicker={`${siteConfig.name} — ${siteConfig.brand}`}
-        title={t("narrative")}
+        title={t("title")}
+        subtitle={t("description")}
       />
     ),
     size,

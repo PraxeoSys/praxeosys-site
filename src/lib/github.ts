@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 const REVALIDATE_SECONDS = 60 * 60 * 24; // daily ISR refresh
 
 export interface ContributionDay {
@@ -12,11 +14,28 @@ export interface ContributionSummary {
   days: ContributionDay[];
 }
 
+function isContributionDay(value: unknown): value is ContributionDay {
+  if (!value || typeof value !== "object") return false;
+  const day = value as Partial<ContributionDay>;
+  return (
+    typeof day.date === "string" &&
+    typeof day.count === "number" &&
+    Number.isFinite(day.count) &&
+    (day.level === 0 ||
+      day.level === 1 ||
+      day.level === 2 ||
+      day.level === 3 ||
+      day.level === 4)
+  );
+}
+
 /**
  * Public GitHub contribution calendar via github-contributions-api (no auth token required).
- * Falls back to null on failure so the UI can degrade gracefully instead of breaking the build.
+ * Returns null on any failure or unusable payload so the UI can say "unavailable"
+ * instead of painting a zero. A successful empty year still returns 0, because that
+ * zero is what the calendar actually contains.
  */
-export async function getContributions(
+export const getContributions = cache(async function getContributions(
   username: string,
 ): Promise<ContributionSummary | null> {
   try {
@@ -28,15 +47,23 @@ export async function getContributions(
     if (!res.ok) return null;
 
     const data = (await res.json()) as {
-      total: Record<string, number>;
-      contributions: ContributionDay[];
+      total?: { lastYear?: number };
+      contributions?: unknown[];
     };
 
-    const days = data.contributions ?? [];
-    const totalContributions = Object.values(data.total ?? {}).reduce(
-      (sum, n) => sum + n,
-      0,
-    );
+    const days = (data.contributions ?? []).filter(isContributionDay);
+    // This endpoint returns a full year of days. An empty list is a bad payload,
+    // not a person with no public activity.
+    if (days.length === 0) return null;
+
+    const fromDays = days.reduce((sum, day) => sum + day.count, 0);
+    const reported = data.total?.lastYear;
+    const totalContributions =
+      typeof reported === "number" && Number.isFinite(reported)
+        ? reported === 0 && fromDays > 0
+          ? fromDays
+          : reported
+        : fromDays;
 
     const weeksWithActivity = new Set(
       days
@@ -52,10 +79,10 @@ export async function getContributions(
   } catch {
     return null;
   }
-}
+});
 
-/** Most recent public push event timestamp, used for the Hero status bar. */
-export async function getLatestCommitAt(
+/** Most recent public event timestamp, used by the system-status panel. */
+export const getLatestCommitAt = cache(async function getLatestCommitAt(
   username: string,
 ): Promise<string | null> {
   try {
@@ -79,7 +106,7 @@ export async function getLatestCommitAt(
   } catch {
     return null;
   }
-}
+});
 
 function isoWeekKey(date: Date): string {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));

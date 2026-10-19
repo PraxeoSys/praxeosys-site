@@ -6,7 +6,8 @@ import { ProjectsSection } from "@/components/projects/ProjectsSection";
 import { ContactSection } from "@/components/contact/ContactSection";
 import { ThinkingSection } from "@/components/narrative/ThinkingSection";
 import { ChapterRail } from "@/components/narrative/ChapterRail";
-import { ReadingProgress } from "@/components/narrative/ReadingProgress";
+import { PageTransition } from "@/components/layout/PageTransition";
+import { Reveal } from "@/components/ui/Reveal";
 import { narrativeActs } from "@data/narrative-acts";
 
 export default async function HomePage({
@@ -25,17 +26,26 @@ export default async function HomePage({
   }));
 
   return (
-    <>
+    <PageTransition>
       <ChapterRail entries={railEntries} ariaLabel={t("ariaLabel")} />
-      <ReadingProgress ariaLabel={t("progressAriaLabel")} />
       <main className="flex-1">
         <Hero />
-        <LoopSection />
-        <ProofSection />
-        <ProjectsSection />
-        <ThinkingSection />
-        <ContactSection />
+        <Reveal>
+          <LoopSection />
+        </Reveal>
+        <Reveal>
+          <ProofSection />
+        </Reveal>
+        <Reveal>
+          <ProjectsSection />
+        </Reveal>
+        <Reveal>
+          <ThinkingSection />
+        </Reveal>
+        <Reveal>
+          <ContactSection />
+        </Reveal>
       </main>
-    </>
+    </PageTransition>
   );
 }
