@@ -2,9 +2,9 @@
 
 > 这份文档是 `data/projects.ts` 内容生成/更新时必须遵守的规则。无论是人工编辑还是通过
 > `upload-project` skill 自动生成，都以此为准。目的：确保每次新增项目时，脱敏尺度、
-> 诚实程度、数据结构、语气风格都和已有的四个项目（`hyperliquid-btc-bot` /
-> `trade-agent` / `tidehook` / `lingua-nest`）保持一致，不因为换了一次会话/换了个人
-> 操作就跑偏。
+> 诚实程度、数据结构、语气风格都和已有的六个项目（`hyperliquid-btc-bot` /
+> `trade-agent` / `tidehook` / `lingua-nest` / `automd-obsidian` /
+> `btc-trader-agent`）保持一致，不因为换了一次会话/换了个人操作就跑偏。
 
 ## 1. 数据结构
 
@@ -37,8 +37,7 @@
 以下内容，逐项检查并清除：
 
 - **真实公司/客户名称**——一律匿名化描述业务性质，不点名（参考 `trade-agent` 项目：
-  真实客户是"深圳市涌序智能供应链有限公司"，最终文案只写"a B2B export lead-gen
-  pipeline"）。
+  真实客户是一家深圳的供应链公司，最终文案只写"a B2B export lead-gen pipeline"）。
 - **联系方式**——电话、微信号、WhatsApp、邮箱等一律不出现。
 - **基础设施地址**——服务器/VPS IP、内网地址、数据库连接串一律不出现。
 - **密钥类信息**——API key、token、密码、钱包私钥/助记词，哪怕已经在源文档里打了码
@@ -73,5 +72,5 @@
 
 ## 5. 参考案例
 
-`data/projects.ts` 里已有的四个项目就是这份宪法的实际执行样本，新项目的文案密度、
+`data/projects.ts` 里已有的六个项目就是这份宪法的实际执行样本，新项目的文案密度、
 数字使用方式、脱敏尺度都应该向它们看齐，而不是自成一派。

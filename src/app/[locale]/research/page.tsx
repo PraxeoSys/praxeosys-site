@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAllArticles, type ResearchTag } from "@/lib/mdx";
-import { Link } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import { buildAlternates, buildOpenGraph } from "@/lib/seo";
 import type { Locale } from "@/lib/types";
@@ -47,11 +47,24 @@ export default async function ResearchListPage({
   const { tag } = await searchParams;
   const t = await getTranslations("research");
 
-  const activeTag = TAGS.includes(tag as ResearchTag)
+  const allArticles = getAllArticles(locale);
+  const populatedTags = TAGS.filter((candidate) =>
+    allArticles.some((article) => article.tags.includes(candidate)),
+  );
+  const requestedTag = TAGS.includes(tag as ResearchTag)
     ? (tag as ResearchTag)
     : undefined;
 
-  const articles = getAllArticles(locale, activeTag);
+  // A known tag with no published article would render an empty list.
+  // Send that URL to the research index, which has real notes.
+  if (requestedTag && !populatedTags.includes(requestedTag)) {
+    redirect({ href: "/research", locale });
+  }
+
+  const activeTag = requestedTag;
+  const articles = activeTag
+    ? allArticles.filter((article) => article.tags.includes(activeTag))
+    : allArticles;
 
   const tagLabels = {
     macro: t("tags.macro"),
@@ -81,7 +94,7 @@ export default async function ResearchListPage({
         >
           {t("allTag")}
         </Link>
-        {TAGS.map((t2) => (
+        {populatedTags.map((t2) => (
           <Link
             key={t2}
             href={{ pathname: "/research", query: { tag: t2 } }}

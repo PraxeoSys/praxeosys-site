@@ -10,12 +10,12 @@ export async function StatusBar() {
   const t = await getTranslations("hero");
   const latestCommitAt = await getLatestCommitAt(siteConfig.github);
 
-  const focus = nowData[locale].focus;
-  const watching = nowData[locale].watching;
+  const focus = nowData[locale].focusBrief;
+  const watching = nowData[locale].watchingBrief;
 
   const githubStatus = latestCommitAt
     ? formatRelativeTime(latestCommitAt, locale)
-    : t("statusLoading");
+    : t("statusUnavailable");
 
   return (
     <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-panel-foreground/70 sm:text-sm">

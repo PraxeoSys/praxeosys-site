@@ -37,6 +37,12 @@ export function Hero() {
         >
           {t("ctaResearch")}
         </Link>
+        <Link
+          href="/#contact"
+          className="font-mono text-sm text-foreground-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
+        >
+          {t("ctaContact")}
+        </Link>
       </div>
 
       <div className="mt-4 rounded-panel border border-panel-border bg-panel-background px-4 py-3">

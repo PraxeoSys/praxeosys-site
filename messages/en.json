@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Johnny — building PraxeoSys",
-    "description": "I read markets through economics, test beliefs with code, and settle them with trades. Independent developer, Web3 builder, trader, and quant researcher."
+    "description": "An independent builder who turns institutional-economics judgment into falsifiable trading systems and agent tools, and documents the build in public."
   },
   "nav": {
     "proof": "Proof",
@@ -30,14 +30,16 @@
   },
   "hero": {
     "kicker": "Johnny — building PraxeoSys",
-    "narrative": "Deconstruct markets through <thesis>human actions</thesis>, deploy code to <code>sovereign runtimes</code>, and extract yield from <trade>liquidity rifts</trade>.",
+    "narrative": "An independent builder who turns institutional-economics judgment into a <thesis>falsifiable thesis</thesis>, tests it in <code>code</code> and agent tools, and only then risks a sized <trade>trade</trade> — documented in public.",
     "ctaProof": "View Proof",
     "ctaResearch": "Read Research",
+    "ctaContact": "Work with me",
     "statusNow": "now",
     "statusGithub": "github",
     "statusMarkets": "markets",
     "statusWatching": "watching",
-    "statusLoading": "loading…"
+    "statusLoading": "loading…",
+    "statusUnavailable": "unavailable"
   },
   "loop": {
     "heading": "The Loop",
@@ -46,13 +48,14 @@
   },
   "proof": {
     "heading": "Proof",
-    "subheading": "No claim on this site is unbacked. This section is the evidence.",
+    "subheading": "Public build activity. No trading track record is published here.",
     "github": {
       "title": "GitHub activity",
-      "totalCommits": "total commits",
+      "totalCommits": "public contributions",
       "activeWeeks": "active weeks",
+      "scope": "Public repositories only, last 12 months. Private work is not included.",
       "loading": "Loading contribution data…",
-      "error": "Could not load GitHub data right now.",
+      "error": "GitHub activity is unavailable right now.",
       "viewProfile": "View profile →"
     },
     "performance": {
@@ -141,6 +144,6 @@
     "prompt": "$ connect --via"
   },
   "footer": {
-    "tagline": "I read markets through economics, test beliefs with code, and settle them with trades."
+    "tagline": "An independent builder who turns institutional-economics judgment into falsifiable trading systems and agent tools, and documents the build in public."
   }
 }

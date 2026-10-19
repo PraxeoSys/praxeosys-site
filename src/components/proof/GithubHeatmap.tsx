@@ -3,7 +3,6 @@ import { getContributions, type ContributionDay } from "@/lib/github";
 import { siteConfig } from "@data/site-config";
 import { Panel } from "@/components/ui/Panel";
 import { Metric } from "@/components/ui/Metric";
-import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { BootFrame } from "@/components/ui/BootFrame";
 
 function buildWeeks(days: ContributionDay[]): (ContributionDay | null)[][] {
@@ -75,14 +74,14 @@ export async function GithubHeatmap() {
             <div className="mt-4 flex flex-wrap gap-8">
               <Metric
                 label={t("totalCommits")}
-                value={<AnimatedNumber value={data.totalContributions} />}
+                value={data.totalContributions}
                 accent
               />
-              <Metric
-                label={t("activeWeeks")}
-                value={<AnimatedNumber value={data.activeWeeks} />}
-              />
+              <Metric label={t("activeWeeks")} value={data.activeWeeks} />
             </div>
+            <p className="mt-4 max-w-md font-mono text-[11px] leading-relaxed text-panel-foreground/50">
+              {t("scope")}
+            </p>
 
             <a
               href={`https://github.com/${siteConfig.github}`}

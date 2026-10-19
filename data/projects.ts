@@ -68,8 +68,8 @@ export const projects: Project[] = [
       zh: "Hyperliquid BTC 量化交易系统",
     },
     oneLiner: {
-      en: "A rules-based BTC perpetual-futures swing system with hard circuit breakers, running on a $1,000 proof-of-concept stake.",
-      zh: "带硬性熔断机制的 BTC 永续合约波段交易系统，用 1000 美元验证性资金起步。",
+      en: "A rules-based BTC perpetual-futures swing system with hard circuit breakers, running on a small proof-of-concept stake.",
+      zh: "带硬性熔断机制的 BTC 永续合约波段交易系统，用一小笔验证性资金起步。",
     },
     problem: {
       en: "Discretionary crypto trading doesn't scale and leaves no audit trail; going systematic needs a strategy that's honest about what it can't predict, plus execution discipline no human sustains alone.",
@@ -80,8 +80,8 @@ export const projects: Project[] = [
       zh: "基于 Freqtrade + Smart Money Concepts 策略层，用 Coinglass 订单流数据（资金费率、持仓量、清算位）做辅助 sidecar。执行循环内置三道独立熔断；仓位随结构确认金字塔式加仓、止损棘轮上移，止盈按5因子结构反转评分分级减仓。",
     },
     result: {
-      en: "5 execution-layer bugs were caught only by live dry-run testing (not code review), including 2 that silently broke risk-budget math — all fixed. A pre-registered study of 15 crash-precursor indicators honestly reported 0 as reliably predictive rather than tuning the method for a nicer result.",
-      zh: "5 个执行层 bug 只有实盘 dry-run 才发现（代码审查看不出来），其中2个曾静默破坏风险预算计算，均已修复。一项预注册的暴跌前兆研究测了15个候选指标，诚实报告0个可信存活，而不是为了好看结果去调整方法论。",
+      en: "5 execution-layer bugs were caught only by live dry-run testing (not code review), including 2 that silently broke risk-budget math — all fixed. Of 15 pre-registered crash-precursor indicators, 2 technically cleared the bar; none held up after base-rate and independence checks in the formation sample (held-out period, 2022 onward, not yet run).",
+      zh: "5 个执行层 bug 只有实盘 dry-run 才发现（代码审查看不出来），其中 2 个曾静默破坏风险预算计算，均已修复。15 个预注册的暴跌前兆指标里，有 2 个技术上过了门槛；在形成期样本里，经过基准率和独立性检验后没有一个站得住（2022 年起的样本外时段还没跑）。",
     },
     tech: ["Freqtrade", "Python", "Docker", "Coinglass API"],
     links: {
@@ -94,8 +94,8 @@ export const projects: Project[] = [
         zh: "人负责判断市场结构，机器负责计算和执行纪律——绝不反过来。评分系统若第二轮重构后仍通不过样本外检验，就永久降级为仪表盘，不再尝试第三轮。",
       },
       roadmap: {
-        en: "Next: a market-regime percentile dashboard built on the dimensions that survived the event study. Much later, only if warranted: a read-only LLM analyst layer with zero order-placement authority.",
-        zh: "接下来：基于事件研究中存活维度做一个市场状态分位数仪表盘。更远的future（如果确有必要）：一个只读、零下单权限的 LLM 分析师层。",
+        en: "Next: a market-regime percentile dashboard. The crash-precursor study is not a finished screen — the held-out period has not been run. The read-only analyst layer with zero order authority now exists as its own project, BTC Trader Agent — it is not a module of this bot.",
+        zh: "接下来：做一个市场状态分位数仪表盘。暴跌前兆研究还不是完成的筛选，样本外时段尚未跑。原先设想的只读、零下单权限分析层，已经作为独立项目「BTC 交易分析 Agent」落地，它不是这个 bot 的子模块。",
       },
       milestones: [
         {
@@ -121,8 +121,8 @@ export const projects: Project[] = [
         },
         {
           label: {
-            en: "Pre-registered crash-precursor event study (15 indicators, 0 survived)",
-            zh: "预注册暴跌前兆事件研究（15指标，0存活）",
+            en: "Crash-precursor study, formation sample: 2 of 15 cleared the bar; none held up after base-rate and independence checks (held-out not run)",
+            zh: "暴跌前兆研究（形成期）：15 个里 2 个过了技术门槛，经基准率与独立性检验后无一站得住（样本外尚未跑）",
           },
           status: "done",
         },
@@ -146,7 +146,10 @@ export const projects: Project[] = [
           value: "5",
         },
         {
-          label: { en: "Crash-precursor indicators tested", zh: "暴跌前兆候选指标测试数" },
+          label: {
+            en: "Crash-precursor indicators in the formation sample",
+            zh: "形成期样本中的暴跌前兆指标",
+          },
           value: "15",
         },
         {
@@ -181,12 +184,12 @@ export const projects: Project[] = [
       zh: "人工逐个搜索海外企业名录、手写开发信、逐条跟进——这套流程规模上不去。",
     },
     method: {
-      en: "A Python pipeline: Serper Maps API for lead discovery, a scraper + DeepSeek scoring pass for enrichment, AI-drafted emails/WhatsApp/LinkedIn messages in the target market's language, WeChat-notified human approval, and an autopilot mode that auto-sends high-confidence drafts while routing uncertain ones to a person. Deployed with Docker on a small VPS.",
-      zh: "Python 流水线：Serper Maps API 发现线索 → 爬虫 + DeepSeek 评分做情报补全 → AI 生成目标市场语言的邮件/WhatsApp/LinkedIn 草稿 → 微信推送人工审批 → autopilot 模式对高置信度草稿自动发送、低置信度转人工。Docker 部署在小型 VPS 上。",
+      en: "A Python pipeline: Serper Maps API for lead discovery, a scraper + DeepSeek scoring pass for enrichment, AI-drafted emails/WhatsApp/LinkedIn messages in the target market's language, WeChat-notified human approval, and an autopilot mode that auto-sends high-confidence drafts while routing uncertain ones to a person. Packaged with Docker.",
+      zh: "Python 流水线：Serper Maps API 发现线索 → 爬虫 + DeepSeek 评分做情报补全 → AI 生成目标市场语言的邮件/WhatsApp/LinkedIn 草稿 → 微信推送人工审批 → autopilot 模式对高置信度草稿自动发送、低置信度转人工。以 Docker 打包部署。",
     },
     result: {
-      en: "Processed 192 leads end-to-end at an average AI quality score of 6.37/10, for roughly $0.006 in API cost per lead. Target metrics track cold-email industry benchmarks: <1.5% bounce rate, 5–10% reply rate (vs. 2–5% industry norm), <$10 cost per qualified inquiry (vs. $5–50 norm).",
-      zh: "192 条线索全流程处理，AI 平均评分 6.37/10，单条线索 API 成本约 $0.006。目标指标对标冷邮件行业基准：退信率 <1.5%，回复率 5–10%（行业基准 2–5%），单个有效询盘获客成本 <$10（行业基准 $5–50）。",
+      en: "Processed 192 leads end-to-end at an average AI quality score of 6.37/10, for roughly $0.006 in API cost per lead. Reply rate and bounce rate have not been measured.",
+      zh: "192 条线索全流程处理，AI 平均评分 6.37/10，单条线索 API 成本约 $0.006。回复率和退信率尚未测量。",
     },
     tech: ["Python", "FastAPI", "DeepSeek API", "Serper API", "Playwright", "Docker", "SQLite"],
     links: {
@@ -199,8 +202,8 @@ export const projects: Project[] = [
         zh: "用 AI 流水线取代人工搜索加手写开发信的体力活，规模超过一个人手动打字的上限——同时不丢失让冷邮件真正有效的个性化程度。",
       },
       roadmap: {
-        en: "Next: turn on autopilot for the 87 leads still waiting on approval, put reply monitoring on a scheduled job, and manually source decision-makers' LinkedIn profiles for the highest-scored leads.",
-        zh: "接下来：为剩余87条待审批线索开启 autopilot 批量发送，把回函监控接入定时任务，为高评分线索人工补充采购/供应链负责人的 LinkedIn 个人主页。",
+        en: "Next: turn on autopilot for the 87 leads still waiting on approval, put reply monitoring on a scheduled job, and manually source decision-makers' LinkedIn profiles for the highest-scored leads. A bounce rate under 1.5% and a reply rate of 5–10% are targets, not results — neither has been measured here. A 2–5% cold-email reply rate is a figure often cited for the industry, not a number from this pipeline.",
+        zh: "接下来：为剩余 87 条待审批线索开启 autopilot 批量发送，把回函监控接入定时任务，为高评分线索人工补充采购/供应链负责人的 LinkedIn 个人主页。退信率低于 1.5%、回复率 5–10% 是目标，不是结果——这里都还没测过。冷邮件回复率常被说成 2–5%，那是行业里常引用的数字，不是这条流水线的数字。",
       },
       milestones: [
         {
@@ -363,7 +366,7 @@ export const projects: Project[] = [
   {
     slug: "lingua-nest",
     status: "shipped",
-    featured: true,
+    featured: false,
     title: {
       en: "LinguaNest",
       zh: "语巢 LinguaNest",
@@ -565,6 +568,149 @@ export const projects: Project[] = [
       "信息架构 / Information Architecture",
       "GitHub Actions",
       "隐私优先流程设计",
+    ],
+  },
+  {
+    slug: "btc-trader-agent",
+    status: "shipped",
+    featured: true,
+    title: {
+      en: "BTC Trader Agent",
+      zh: "BTC 交易分析 Agent",
+    },
+    oneLiner: {
+      en: "A daily market-analysis agent for BTC, ETH and SOL swings: analysis only, no order authority, every forecast appended and scored by a script.",
+      zh: "面向 BTC、ETH、SOL 波段的每日盘面分析 Agent：只分析、没有下单权限，每条预测只追加记录并由脚本打分。",
+    },
+    problem: {
+      en: "Discretionary swing trading drifts: the rules live in one head, forecasts are never scored, and post-mortems depend on memory. I wanted a process where every claim can be checked against what happened, and where the machine is structurally unable to trade for me.",
+      zh: "主观波段交易会漂移：规则只在脑子里，预测从不打分，复盘靠记忆。我想要一套每个判断都能事后对照结果的流程，并且让机器在结构上就没法替我下单。",
+    },
+    method: {
+      en: "A stdlib-only Python collector pulls public exchange data — spot and perpetual CVD, open interest across 7 perpetual contracts, funding, volume profile, order-book depth, an estimated liquidation map, a macro calendar, and the Hyperliquid basis. A health-check gate decides whether a conclusion may be drawn at all. Claude Code writes the daily report from a fixed template: bull and bear evidence side by side, scenarios with a trigger, a target, an invalidation and a probability. Hard rules: numbers only from script output, predictions append-only, rule changes only with my confirmation, versions kept as git tags. A Windows scheduled task is wired so the run can be unattended. It does not place orders.",
+      zh: "纯标准库的 Python 采集器抓取公开交易所数据——现货和合约 CVD、7 个永续合约的持仓量、资金费率、成交量分布、订单簿深度、一份估算的清算分布、宏观日程，以及 Hyperliquid 基差。自检门决定这份数据能不能下结论。Claude Code 按固定模板写日报：多空证据并列，情景写明触发、目标、失效和概率。硬规则：数字只能来自脚本输出，预测只追加，规则改动必须我确认，版本用 git tag 留下。用 Windows 计划任务接好，以便无人值守运行。它不下单。",
+    },
+    result: {
+      en: "Backtests, not a live track record. On daily data from 2018-08 to 2026-09, adding ETH to BTC lifted the system's SQN from 1.44 to 1.93 at a similar max drawdown (14.1% vs 14.8%), while an 18-coin universe that includes delisted names showed roughly zero edge — so the set was cut to BTC, ETH and SOL. BTC per-trade expectancy fell from +3.35R on the full sample to +0.93R after 2021-08. As of 2026-09-25 the agent had logged 12 forecasts; only 2 had expired, with 1 direction hit. That sample is too small to claim skill.",
+      zh: "这是回测，不是实盘业绩。2018-08 至 2026-09 的日线数据上，在 BTC 之上加入 ETH，系统 SQN 从 1.44 升到 1.93，最大回撤相近（14.1% 对 14.8%）；把已下架币算进去、规避幸存者偏差的 18 币全集几乎没有优势，所以品种被砍到 BTC、ETH、SOL。BTC 单笔期望从全样本 +3.35R 降到 2021-08 之后的 +0.93R。截至 2026-09-25，Agent 记录了 12 条预测，只有 2 条到期，方向命中 1 条。样本太小，证明不了能力。",
+    },
+    tech: ["Python", "Claude Code", "Windows Task Scheduler", "Git"],
+    links: {
+      demo: undefined,
+      github: undefined,
+    },
+    direction: {
+      vision: {
+        en: "A trading process where every claim is scored against the outcome. The machine handles data, arithmetic and bookkeeping, and has no order authority. The human owns decisions and rule changes. A hypothesis is written into the methodology only after it has been confirmed three or more times.",
+        zh: "一套每个判断都要对照结果打分的交易流程。机器负责数据、算术和记账，没有下单权限。决策和规则改动归人。一条假设至少被验证三次，才写进方法论。",
+      },
+      roadmap: {
+        en: "Next: calibrate the estimated liquidation map (it uses one exchange's open interest plus an assumed leverage mix), feed the ETF-flow module with a live data key, and widen coverage to CME and options. Then accumulate enough scored forecasts, and enough live trades, for a track record to mean something. None of that is a performance claim today.",
+        zh: "接下来：校准估算清算分布（目前只用单一交易所的持仓量，加上假设的杠杆分布），给 ETF 资金流模块接上实际数据 key，并覆盖 CME 和期权。然后再积累足够多的已评分预测和实盘记录，让业绩记录有意义。这些都还不是今天的业绩声明。",
+      },
+      milestones: [
+        {
+          label: {
+            en: "Data collector, health-check gate, and append-only forecast scoring",
+            zh: "数据采集器、数据自检门、只追加的预测评分",
+          },
+          status: "done",
+          date: "2026-09",
+        },
+        {
+          label: {
+            en: "Trading system v1.0 to v1.4: regime filter, risk-unit sizing, circuit breakers, no-chase rule",
+            zh: "交易系统 v1.0 到 v1.4：状态过滤、风险单位定仓、熔断、不追单",
+          },
+          status: "done",
+          date: "2026-09",
+        },
+        {
+          label: {
+            en: "Multi-asset backtests: BTC, ETH and SOL kept; the 18-coin universe rejected",
+            zh: "多品种回测：保留 BTC、ETH、SOL，否决 18 币全集",
+          },
+          status: "done",
+          date: "2026-09",
+        },
+        {
+          label: {
+            en: "Scheduled daily run wired up, plus PDF report rendering",
+            zh: "每日计划任务接好，以及 PDF 报告渲染",
+          },
+          status: "done",
+          date: "2026-09",
+        },
+        {
+          label: {
+            en: "ETF-flow module: code in place; live data key not configured as of 2026-09-25",
+            zh: "ETF 资金流模块：代码已接入；截至 2026-09-25 尚未配置实际数据 key",
+          },
+          status: "in-progress",
+        },
+        {
+          label: {
+            en: "Forecast calibration on a sample large enough to mean something",
+            zh: "在足够有意义的样本量上校准预测",
+          },
+          status: "in-progress",
+        },
+        {
+          label: {
+            en: "Liquidation-map calibration, and CME / options coverage",
+            zh: "清算分布校准，以及覆盖 CME / 期权",
+          },
+          status: "planned",
+        },
+        {
+          label: {
+            en: "30 live trades under the system before any increase in risk size",
+            zh: "系统下累计 30 笔实盘之后，才允许调高单笔风险",
+          },
+          status: "planned",
+        },
+      ],
+    },
+    progress: {
+      status: {
+        en: "Analysis tooling, not a track record. The published repo snapshot runs from 2026-09-23 to 2026-09-25. As of that date the journal had no live trades under the current rules, and only 2 forecasts had been scored. Whether the scheduled task has kept running since is not something this page claims.",
+        zh: "这是分析工具，不是业绩记录。公开仓库的快照从 2026-09-23 到 2026-09-25。截至那天，当前规则下的日志里没有实盘记录，已评分的预测只有 2 条。计划任务此后是否还在跑，本页不做声明。",
+      },
+      metrics: [
+        {
+          label: {
+            en: "Forecasts logged, as of 2026-09-25",
+            zh: "已记录预测（截至 2026-09-25）",
+          },
+          value: "12",
+        },
+        {
+          label: {
+            en: "Scored / direction hits, as of 2026-09-25",
+            zh: "已评分 / 方向命中（截至 2026-09-25）",
+          },
+          value: "2 / 1",
+        },
+        {
+          label: { en: "Symbols kept after backtesting", zh: "回测后保留的品种" },
+          value: "3 of 18",
+        },
+        {
+          label: {
+            en: "Trading-system version, as of 2026-09-25",
+            zh: "交易系统版本（截至 2026-09-25）",
+          },
+          value: "v1.4",
+        },
+      ],
+    },
+    skills: [
+      "量化回测 / Backtesting",
+      "Python（纯标准库）",
+      "Claude Code 自动化",
+      "预测校准 / Forecast Calibration",
+      "风险单位与熔断设计",
+      "衍生品微观结构 / Derivatives Microstructure",
     ],
   },
 ];

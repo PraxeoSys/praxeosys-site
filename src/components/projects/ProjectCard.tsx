@@ -39,6 +39,7 @@ export function ProjectCard({ project, locale, labels, index }: ProjectCardProps
 
   return (
     <motion.article
+      id={project.slug}
       layout
       transition={transitions.drawer}
       className="flex flex-col gap-4 rounded-panel border border-border p-6"
