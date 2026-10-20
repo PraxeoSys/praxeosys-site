@@ -64,8 +64,8 @@ export const loopNodes: LoopNode[] = [
       zh: "验证",
     },
     description: {
-      en: "Review honestly, including the misses. Every forecast is appended to a log that is not edited afterwards and is scored by a script, not by memory. As of 2026-09-25, 12 forecasts were logged and only 2 had expired, with 1 direction hit — too small a sample to claim skill, and the log says so.",
-      zh: "诚实复盘，包括没对上的部分。每条预测都追加进一份事后不改的记录，由脚本而不是记忆来打分。截至 2026-09-25，记录了 12 条预测，只有 2 条到期，方向命中 1 条——样本小到证明不了能力，记录里也是这么写的。",
+      en: "Review honestly, including the misses. Every forecast is appended to a log and scored by a script, not by memory. On 2026-09-28, scores moved to a separate file so past forecasts are never rewritten. As of 2026-10-15, 40 forecasts were logged. Primary 24h direction hits are 9/16, against an always-range-bound baseline of 10/16; 7d hits are 4/13, against 7/13. The forecasts do not yet beat that baseline, and a Brier score is not computable yet (n=0).",
+      zh: "诚实复盘，包括没对上的部分。每条预测都追加进记录，由脚本而不是记忆来打分。2026-09-28 起，评分挪到单独的文件，过去的预测不再被改写。截至 2026-10-15，记录了 40 条预测。主样本的 24 小时方向命中是 9/16，始终判断为震荡的基线是 10/16；7 日命中是 4/13，基线是 7/13。这些预测目前还没有超过基线，Brier 分数也还算不出来（n=0）。",
     },
     href: "/projects#btc-trader-agent",
   },

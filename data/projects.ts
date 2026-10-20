@@ -579,22 +579,22 @@ export const projects: Project[] = [
       zh: "BTC 交易分析 Agent",
     },
     oneLiner: {
-      en: "A daily market-analysis agent for BTC, ETH and SOL swings: analysis only, no order authority, every forecast appended and scored by a script.",
-      zh: "面向 BTC、ETH、SOL 波段的每日盘面分析 Agent：只分析、没有下单权限，每条预测只追加记录并由脚本打分。",
+      en: "A daily market-analysis agent for BTC, with ETH and SOL as context: analysis only, no order authority. Forecasts are appended and scored by a script. Daily runs are on Codex CLI.",
+      zh: "每日 BTC 盘面分析 Agent，ETH 和 SOL 作上下文：只分析、没有下单权限。预测只追加，并由脚本打分。每日运行在 Codex CLI 上。",
     },
     problem: {
-      en: "Discretionary swing trading drifts: the rules live in one head, forecasts are never scored, and post-mortems depend on memory. I wanted a process where every claim can be checked against what happened, and where the machine is structurally unable to trade for me.",
-      zh: "主观波段交易会漂移：规则只在脑子里，预测从不打分，复盘靠记忆。我想要一套每个判断都能事后对照结果的流程，并且让机器在结构上就没法替我下单。",
+      en: "Discretionary analysis drifts: forecasts are never scored, and post-mortems depend on memory. I wanted a process where every claim can be checked against what happened, and where the machine is structurally unable to trade for me.",
+      zh: "主观分析会漂移：预测从不打分，复盘靠记忆。我想要一套每个判断都能事后对照结果的流程，并且让机器在结构上就没法替我下单。",
     },
     method: {
-      en: "A stdlib-only Python collector pulls public exchange data — spot and perpetual CVD, open interest across 7 perpetual contracts, funding, volume profile, order-book depth, an estimated liquidation map, a macro calendar, and the Hyperliquid basis. A health-check gate decides whether a conclusion may be drawn at all. Claude Code writes the daily report from a fixed template: bull and bear evidence side by side, scenarios with a trigger, a target, an invalidation and a probability. Hard rules: numbers only from script output, predictions append-only, rule changes only with my confirmation, versions kept as git tags. A Windows scheduled task is wired so the run can be unattended. It does not place orders.",
-      zh: "纯标准库的 Python 采集器抓取公开交易所数据——现货和合约 CVD、7 个永续合约的持仓量、资金费率、成交量分布、订单簿深度、一份估算的清算分布、宏观日程，以及 Hyperliquid 基差。自检门决定这份数据能不能下结论。Claude Code 按固定模板写日报：多空证据并列，情景写明触发、目标、失效和概率。硬规则：数字只能来自脚本输出，预测只追加，规则改动必须我确认，版本用 git tag 留下。用 Windows 计划任务接好，以便无人值守运行。它不下单。",
+      en: "A stdlib-only Python collector pulls public exchange data — trend and technicals, volume profile, spot and futures CVD, open interest, funding, order-book depth as supporting evidence, and an estimated liquidation map. A health-check gate decides whether a conclusion may be drawn at all. Since 2026-09-28, Codex CLI writes the daily report: bull and bear cases first, then falsifiable 24h and 7d scenarios. Forecasts stay append-only. On that same date, scores moved to a separate file so past forecasts are never rewritten. It does not place orders and it does not give personalised advice.",
+      zh: "纯标准库的 Python 采集器抓取公开交易所数据——趋势与技术指标、成交量分布、现货和合约 CVD、持仓量、资金费率、仅作辅助的订单簿深度，以及一份估算的清算分布。自检门决定这份数据能不能下结论。自 2026-09-28 起，日报由 Codex CLI 来写：先写多空两边，再写可证伪的 24 小时和 7 日情景。预测只追加。同一天起，评分写进单独的文件，过去的预测不再被改写。它不下单，也不提供个性化建议。",
     },
     result: {
-      en: "Backtests, not a live track record. On daily data from 2018-08 to 2026-09, adding ETH to BTC lifted the system's SQN from 1.44 to 1.93 at a similar max drawdown (14.1% vs 14.8%), while an 18-coin universe that includes delisted names showed roughly zero edge — so the set was cut to BTC, ETH and SOL. BTC per-trade expectancy fell from +3.35R on the full sample to +0.93R after 2021-08. As of 2026-09-25 the agent had logged 12 forecasts; only 2 had expired, with 1 direction hit. That sample is too small to claim skill.",
-      zh: "这是回测，不是实盘业绩。2018-08 至 2026-09 的日线数据上，在 BTC 之上加入 ETH，系统 SQN 从 1.44 升到 1.93，最大回撤相近（14.1% 对 14.8%）；把已下架币算进去、规避幸存者偏差的 18 币全集几乎没有优势，所以品种被砍到 BTC、ETH、SOL。BTC 单笔期望从全样本 +3.35R 降到 2021-08 之后的 +0.93R。截至 2026-09-25，Agent 记录了 12 条预测，只有 2 条到期，方向命中 1 条。样本太小，证明不了能力。",
+      en: "As of 2026-10-15 the log holds 40 forecasts: 20 at 24h and 20 at 7d, of which 4 are same-day supplements and stay out of the primary sample. Primary 24h forecasts are 16 of 16 final, with direction hits 9/16 (56%) against an always-range-bound baseline of 10/16 (62.5%). Primary 7d forecasts are 13 of 16 final (3 missing data), with direction hits 4/13 (31%) against a baseline of 7/13 (54%). The forecasts do not yet beat that baseline. A Brier score is not computable yet (n=0), because older records carry no probabilities. Methodology v1.4, scoring v2.0.",
+      zh: "截至 2026-10-15，日志里有 40 条预测：24 小时 20 条、7 日 20 条，其中 4 条是当日补充，不进入主样本。主样本里，24 小时预测 16 条全部终评，方向命中 9/16（56%），始终判断为震荡的基线是 10/16（62.5%）。7 日预测 16 条里 13 条终评（3 条缺数据），方向命中 4/13（31%），基线是 7/13（54%）。这些预测目前还没有超过这条基线。Brier 分数还算不出来（n=0），因为较早的记录里没有概率。方法论 v1.4，评分 v2.0。",
     },
-    tech: ["Python", "Claude Code", "Windows Task Scheduler", "Git"],
+    tech: ["Python", "Codex CLI", "Git"],
     links: {
       demo: undefined,
       github: undefined,
@@ -605,111 +605,112 @@ export const projects: Project[] = [
         zh: "一套每个判断都要对照结果打分的交易流程。机器负责数据、算术和记账，没有下单权限。决策和规则改动归人。一条假设至少被验证三次，才写进方法论。",
       },
       roadmap: {
-        en: "Next: calibrate the estimated liquidation map (it uses one exchange's open interest plus an assumed leverage mix), feed the ETF-flow module with a live data key, and widen coverage to CME and options. Then accumulate enough scored forecasts, and enough live trades, for a track record to mean something. None of that is a performance claim today.",
-        zh: "接下来：校准估算清算分布（目前只用单一交易所的持仓量，加上假设的杠杆分布），给 ETF 资金流模块接上实际数据 key，并覆盖 CME 和期权。然后再积累足够多的已评分预测和实盘记录，让业绩记录有意义。这些都还不是今天的业绩声明。",
+        en: "Next: keep scoring both horizons against the always-range-bound baseline, and accumulate probabilistic forecasts so a Brier score can exist. It does not yet. None of this is a performance claim.",
+        zh: "接下来：继续用始终判断为震荡的基线给两个期限打分，并积累带概率的预测，让 Brier 分数有得可算。现在还没有。这些都不是业绩声明。",
       },
       milestones: [
         {
           label: {
-            en: "Data collector, health-check gate, and append-only forecast scoring",
-            zh: "数据采集器、数据自检门、只追加的预测评分",
+            en: "Data collector, health-check gate, and append-only forecast log",
+            zh: "数据采集器、数据自检门、只追加的预测日志",
           },
           status: "done",
           date: "2026-09",
         },
         {
           label: {
-            en: "Trading system v1.0 to v1.4: regime filter, risk-unit sizing, circuit breakers, no-chase rule",
-            zh: "交易系统 v1.0 到 v1.4：状态过滤、风险单位定仓、熔断、不追单",
+            en: "Scores moved to a separate file; daily runs switched to Codex CLI",
+            zh: "评分挪到单独文件；每日运行改到 Codex CLI",
           },
           status: "done",
-          date: "2026-09",
+          date: "2026-09-28",
         },
         {
           label: {
-            en: "Multi-asset backtests: BTC, ETH and SOL kept; the 18-coin universe rejected",
-            zh: "多品种回测：保留 BTC、ETH、SOL，否决 18 币全集",
+            en: "Methodology v1.4 and scoring v2.0 adopted",
+            zh: "采用方法论 v1.4 与评分 v2.0",
           },
           status: "done",
-          date: "2026-09",
+          date: "2026-10-17",
         },
         {
           label: {
-            en: "Scheduled daily run wired up, plus PDF report rendering",
-            zh: "每日计划任务接好，以及 PDF 报告渲染",
-          },
-          status: "done",
-          date: "2026-09",
-        },
-        {
-          label: {
-            en: "ETF-flow module: code in place; live data key not configured as of 2026-09-25",
-            zh: "ETF 资金流模块：代码已接入；截至 2026-09-25 尚未配置实际数据 key",
+            en: "Primary forecasts vs an always-range-bound baseline: behind at both horizons, as of 2026-10-15",
+            zh: "主样本对照始终震荡基线：截至 2026-10-15，两个期限都落后",
           },
           status: "in-progress",
         },
         {
           label: {
-            en: "Forecast calibration on a sample large enough to mean something",
-            zh: "在足够有意义的样本量上校准预测",
+            en: "Probabilistic forecasts so a Brier score can be computed (n=0 so far)",
+            zh: "带概率的预测，使 Brier 分数可计算（目前 n=0）",
           },
           status: "in-progress",
-        },
-        {
-          label: {
-            en: "Liquidation-map calibration, and CME / options coverage",
-            zh: "清算分布校准，以及覆盖 CME / 期权",
-          },
-          status: "planned",
-        },
-        {
-          label: {
-            en: "30 live trades under the system before any increase in risk size",
-            zh: "系统下累计 30 笔实盘之后，才允许调高单笔风险",
-          },
-          status: "planned",
         },
       ],
     },
     progress: {
       status: {
-        en: "Analysis tooling, not a track record. The published repo snapshot runs from 2026-09-23 to 2026-09-25. As of that date the journal had no live trades under the current rules, and only 2 forecasts had been scored. Whether the scheduled task has kept running since is not something this page claims.",
-        zh: "这是分析工具，不是业绩记录。公开仓库的快照从 2026-09-23 到 2026-09-25。截至那天，当前规则下的日志里没有实盘记录，已评分的预测只有 2 条。计划任务此后是否还在跑，本页不做声明。",
+        en: "Analysis only, not a track record, and no order authority. As of 2026-10-15, 40 forecasts are logged and the latest forecast is that date. Daily runs are on Codex CLI. Methodology v1.4, scoring v2.0. Direction hits do not yet beat an always-range-bound baseline, and Brier is not computable yet (n=0).",
+        zh: "只分析，不是业绩记录，也没有下单权限。截至 2026-10-15，已记录 40 条预测，最近一条预测也是这一天。每日运行在 Codex CLI 上。方法论 v1.4，评分 v2.0。方向命中目前还没有超过始终判断为震荡的基线，Brier 也还算不出来（n=0）。",
       },
       metrics: [
         {
           label: {
-            en: "Forecasts logged, as of 2026-09-25",
-            zh: "已记录预测（截至 2026-09-25）",
+            en: "Forecasts logged, as of 2026-10-15",
+            zh: "已记录预测（截至 2026-10-15）",
           },
-          value: "12",
+          value: "40",
         },
         {
           label: {
-            en: "Scored / direction hits, as of 2026-09-25",
-            zh: "已评分 / 方向命中（截至 2026-09-25）",
+            en: "24h direction hits, as of 2026-10-15",
+            zh: "24 小时方向命中（截至 2026-10-15）",
           },
-          value: "2 / 1",
-        },
-        {
-          label: { en: "Symbols kept after backtesting", zh: "回测后保留的品种" },
-          value: "3 of 18",
+          value: "9/16",
         },
         {
           label: {
-            en: "Trading-system version, as of 2026-09-25",
-            zh: "交易系统版本（截至 2026-09-25）",
+            en: "24h always-range baseline, as of 2026-10-15",
+            zh: "24 小时始终震荡基线（截至 2026-10-15）",
           },
-          value: "v1.4",
+          value: "10/16",
+        },
+        {
+          label: {
+            en: "7d direction hits, as of 2026-10-15",
+            zh: "7 日方向命中（截至 2026-10-15）",
+          },
+          value: "4/13",
+        },
+        {
+          label: {
+            en: "7d always-range baseline, as of 2026-10-15",
+            zh: "7 日始终震荡基线（截至 2026-10-15）",
+          },
+          value: "7/13",
+        },
+        {
+          label: {
+            en: "Methodology / scoring version, as of 2026-10-15",
+            zh: "方法论 / 评分版本（截至 2026-10-15）",
+          },
+          value: "v1.4 / v2.0",
+        },
+        {
+          label: {
+            en: "Brier scores, as of 2026-10-15",
+            zh: "可计算的 Brier 分数（截至 2026-10-15）",
+          },
+          value: "0",
         },
       ],
     },
     skills: [
-      "量化回测 / Backtesting",
       "Python（纯标准库）",
-      "Claude Code 自动化",
+      "Codex CLI 自动化",
       "预测校准 / Forecast Calibration",
-      "风险单位与熔断设计",
+      "只追加日志 / Append-only Logs",
       "衍生品微观结构 / Derivatives Microstructure",
     ],
   },
