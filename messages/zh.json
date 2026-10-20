@@ -155,12 +155,13 @@
     "notLive": "已发布的快照。不是实时数据，也不是业绩记录。",
     "agent": "BTC 分析 Agent",
     "agentState": "只分析",
-    "agentDetail": "没有下单权限。本页不声称计划任务仍在运行。",
-    "version": "版本",
+    "agentDetail": "没有下单权限。每日运行在 Codex CLI 上。",
+    "versionLine": "方法论 {method} · 评分 {scoring}",
     "forecasts": "预测",
     "logged": "已记录",
-    "scored": "已评分",
-    "hits": "方向命中",
+    "horizon24h": "24 小时方向命中",
+    "horizon7d": "7 日方向命中",
+    "baseline": "基线",
     "research": "研究笔记",
     "researchScope": "本语言已发布",
     "latest": "最近 {date}",
@@ -173,7 +174,7 @@
     "openAgent": "打开 Agent 项目",
     "openResearch": "打开研究",
     "openGithub": "打开 GitHub",
-    "sample": "已评分样本 n={count}。太小，证明不了能力。"
+    "baselineNote": "两个期限都还没有超过始终判断为震荡的基线。Brier 分数目前算不出来（n={count}）。"
   },
   "command": {
     "open": "打开命令面板",

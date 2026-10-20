@@ -57,7 +57,10 @@ export async function SystemStatus() {
                   {t("agent")}
                 </h3>
                 <span className="font-mono text-xs text-accent">
-                  {t("version")} {agent.version}
+                  {t("versionLine", {
+                    method: agent.methodology,
+                    scoring: agent.scoring,
+                  })}
                 </span>
               </div>
               <p className="mt-2 font-serif text-2xl text-panel-foreground sm:text-3xl">
@@ -78,7 +81,7 @@ export async function SystemStatus() {
               <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-panel-foreground/50">
                 {t("forecasts")}
               </h3>
-              <dl className="mt-3 grid grid-cols-3 gap-3">
+              <dl className="mt-3">
                 <div>
                   <dd className="font-mono text-2xl tabular-nums text-accent sm:text-3xl">
                     <AnimatedNumber value={agent.logged} />
@@ -87,25 +90,26 @@ export async function SystemStatus() {
                     {t("logged")}
                   </dt>
                 </div>
-                <div>
-                  <dd className="font-mono text-2xl tabular-nums text-panel-foreground sm:text-3xl">
-                    <AnimatedNumber value={agent.scored} />
-                  </dd>
-                  <dt className="mt-1 font-mono text-[10px] uppercase tracking-wider text-panel-foreground/50">
-                    {t("scored")}
-                  </dt>
-                </div>
-                <div>
-                  <dd className="font-mono text-2xl tabular-nums text-panel-foreground sm:text-3xl">
-                    <AnimatedNumber value={agent.directionHits} />
-                  </dd>
-                  <dt className="mt-1 font-mono text-[10px] uppercase tracking-wider text-panel-foreground/50">
-                    {t("hits")}
-                  </dt>
-                </div>
+                {agent.horizons.map((horizon) => (
+                  <div
+                    key={horizon.id}
+                    className="mt-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-t border-panel-border pt-3"
+                  >
+                    <dt className="font-mono text-[10px] uppercase tracking-wider text-panel-foreground/50">
+                      {t(horizon.id === "24h" ? "horizon24h" : "horizon7d")}
+                    </dt>
+                    <dd className="font-mono text-sm tabular-nums text-panel-foreground">
+                      {horizon.hits}/{horizon.scored}
+                      <span className="text-panel-foreground/45">
+                        {" "}
+                        · {t("baseline")} {horizon.baselineHits}/{horizon.baselineScored}
+                      </span>
+                    </dd>
+                  </div>
+                ))}
               </dl>
               <p className="mt-3 font-mono text-[11px] leading-relaxed text-panel-foreground/45">
-                {t("sample", { count: agent.scored })}
+                {t("baselineNote", { count: agent.brierN })}
               </p>
             </div>
           </div>
